@@ -1,0 +1,92 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block body %}
+    <!-- navigation -->
+    <nav class="navbar no-margin-bottom alt-font without-button transparent-header">
+        <div class="container navigation-menu">
+            <div class="row">
+                <!-- Logo -->
+                <div class="col-lg-2 col-md-2 navbar-header">
+                    <a class="navbar-brand inner-link" href="#"><img
+                            src="{% static "images/logo-photography.png" %}" alt="Crazy Minion"/></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- end navigation -->
+
+    {% for subject in subjects %}
+        <!-- parallax background -->
+        <section id="{{ subject.title }}" class="no-padding fix-background"
+                 style="background-image:url({{ subject.image.url }});">
+            <div class="container full-screen position-relative">
+                <div class="slider-typography text-center">
+                    <div class="slider-text-middle-main">
+                        <div class="slider-text-middle slider-typography-option1">
+                            <span class="transparent-blue-text alt-font text-uppercase sm-title-extra-large ">{{ subject.title }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {#  TODO Enable counts #}
+            {#            <div class="scroll-down">#}
+            {#                <p class="alt-font text-uppercase letter-spacing-6 white-text">2480 shots</p>#}
+            {#                <div class="separator-line-thick-long bg-transparent-blue margin-one no-margin-bottom center-col margin-lr-auto"></div>#}
+            {#            </div>#}
+        </section>
+        <!-- end parallax background -->
+
+    {% endfor %}
+
+
+    <!-- about section -->
+    <section id="about" class="wow fadeIn no-padding cover-background photography-about background-position-left"
+             style="background-image:url({% static 'images/index_about_bg.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <!-- section title -->
+                <div class="col-md-6 col-sm-6 text-left margin-thirty-five no-margin-lr no-margin-bottom">
+                    <span class="title-big text-uppercase transparent-green-text alt-font md-title-extra-large-5 sm-title-extra-large-4 xs-title-extra-large-3 font-weight-600">About</span>
+                </div>
+                <!-- end section title -->
+                <!-- text -->
+                <div class="col-md-6 col-sm-6 margin-thirty-five no-margin-lr no-margin-bottom xs-margin-thirty-five xs-no-margin-lr">
+                    <span class="alt-font title-medium text-uppercase photography-quotes xs-title-small font-weight-600">You don't take a<br>photograph, you<br>make it.</span>
+                    <p class="text-medium width-60 margin-fifteen no-margin-lr sm-width-90">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the
+                        printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is
+                        simply dummy text of the printing and typesetting industry.
+                    </p>
+                </div>
+                <!-- end text -->
+            </div>
+        </div>
+    </section>
+    <!-- end about section -->
+
+    <!-- services section -->
+    <section id="services" class="wow fadeIn no-padding cover-background photography-services"
+             style="background-image:url({% static 'images/photography-img6.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <!-- section title -->
+                <div class="col-md-6 col-sm-6 text-left margin-thirty-five no-margin-lr no-margin-bottom xs-margin-nineteen xs-no-margin-lr xs-no-margin-bottom pull-right xs-width-100">
+                    <span class="title-big text-uppercase transparent-green-text alt-font md-title-extra-large-5 sm-title-extra-large-4 xs-title-extra-large-3 font-weight-600">Services</span>
+                </div>
+                <!-- end section title -->
+                <!-- text -->
+                <div class="col-md-6 col-sm-6 margin-thirty-five no-margin-lr no-margin-bottom xs-margin-twenty-nine xs-no-margin-lr xs-no-margin-bottom pull-left xs-width-100">
+                    <p class="text-medium width-60 margin-fifteen no-margin-lr no-margin-top sm-width-90">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the
+                        printing and typesetting industry.
+                    </p>
+                </div>
+                <!-- end text -->
+            </div>
+        </div>
+    </section>
+    <!-- end services section -->
+
+{% endblock %}

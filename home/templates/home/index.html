@@ -1,0 +1,6 @@
+{% extends 'home/base.html' %}
+{% block body_block %}<h1>Hey</H1>
+    {% for subject in subjects %}
+        <a href="{% url 'main:subject' subject.slug %}">{{ subject.title }}</a>
+    {% endfor %}
+{% endblock %}

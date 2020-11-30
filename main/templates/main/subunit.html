@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+{% block body_block %}
+    <h3>{{ subunit.unit.subject.title }}/</h3><h3>{{ subunit.unit.title }}/</h3>
+    <ol>
+        {% for flashcard in flashcards %}
+            <li>
+                <h4><a href="{% url 'main:flashcard' flashcard.slug %}">{{ flashcard.title }}</a></h4><br>
+                <h5>{{ flashcard.description }}</h5>
+            </li>
+        {% endfor %}
+    </ol>
+{% endblock %}

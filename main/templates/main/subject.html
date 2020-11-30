@@ -1,0 +1,8 @@
+{% extends 'main/base.html' %}
+{% block body_block %}
+    <H1>{{ subject }}</H1>
+    {% for unit in units %}
+        <a href="{% url 'main:unit' unit.slug %}"> {{ unit.title }} </a><br>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+{% block body_block %}
+
+    <h3>{{ flashcard.subunit.unit.subject.title }}/</h3><h3>{{ flashcard.subunit.unit.title }}/</h3>
+    <h3>{{ flashcard.subunit.title }}</h3><br>
+    <h4>{{ flashcard.title }}</h4>
+    <h5>Brief</h5>
+    <p>{{ flashcard.content_brief|safe }}</p>
+    <h5>Summary</h5>
+    <p>{{ flashcard.content_summary }}</p>
+    <h5>Description</h5>
+    <p>{{ flashcard.description }}</p>
+
+    <img src="{{ flashcard.image.url }}" alt="Description" width="240">
+
+{% endblock %}

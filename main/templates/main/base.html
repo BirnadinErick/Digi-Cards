@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    {% if title %}
+        <title>Flashcards:{{ title }}</title>
+    {% else %}
+        <title>Flashcards</title>
+    {% endif %}
+</head>
+<body>
+<a href="{% url 'admin:index' %}">Admin</a>
+<h3>HEY from base</h3>
+{% block body_block %}
+{% endblock %}
+</body>
+</html>
