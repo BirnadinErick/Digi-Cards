@@ -20,5 +20,6 @@ There are 5 models each corresponding to:-
   * Flashcard
   
 ## I hope this will help someone one way or the another. 😉
-A 🙋‍♂️ from Jaffna
-© Crazy Minion 2020.
+A 🙋‍♂️ from Jaffna 😘. 
+
+All Rights Reserved. Crazy Minion © 2020.
