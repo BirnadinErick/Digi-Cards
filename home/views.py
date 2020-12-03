@@ -9,8 +9,8 @@ class IndexView(ListView):
     TODO: Add a feature to render no of units in subject
     """
 
-    template_name = 'home/index_final.html'  # template to render
-    context_object_name = 'subjects'  # output object
+    template_name = 'home/index.html'  # template to render
+    context_object_name = 'subjects'  # output object name
     model = Subject
 
     def get_queryset(self):

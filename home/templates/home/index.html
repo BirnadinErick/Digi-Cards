@@ -1,6 +1,129 @@
+<!-- pre-processing -->
 {% extends 'home/base.html' %}
-{% block body_block %}<h1>Hey</H1>
+{% load static %}
+<!-- end pre-processing -->
+
+<!-- body -->
+{% block body %}
+
+    <!-- navigation -->
+    <nav class="navbar no-margin-bottom alt-font without-button transparent-header">
+        <div class="container navigation-menu">
+            <div class="row">
+                <!-- Logo -->
+                <div class="col-lg-2 col-md-2 navbar-header">
+                    <a class="navbar-brand inner-link"
+                       href="https://www.youtube.com/channel/UC5Raeh--AL1ReL6B7YmIEYg"><img
+                            src="{% static "images/logo-header.png" %}" alt="Crazy Minion"/></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- end navigation -->
+
+    <!-- subject section -->
     {% for subject in subjects %}
-        <a href="{% url 'main:subject' subject.slug %}">{{ subject.title }}</a>
+        <section id="{{ subject.title }}" class="wow fadeIn no-padding fix-background black-overlay"
+                 style="background-image:url({{ subject.image.url }});">
+            <div class="container full-screen position-relative">
+                <div class="slider-typography text-center">
+                    <div class="slider-text-middle-main">
+                        <div class="slider-text-middle slider-typography-option1">
+                            <span class="alt-font text-uppercase sm-title-extra-large "><a
+                                    class={{ css_color | random }}
+                                            href="{% url 'digi-cards:subject' subject.slug %}">{{ subject.title }}</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {#  TODO Enable counts #}
+            {#            <div class="scroll-down">#}
+            {#                <p class="alt-font text-uppercase letter-spacing-6 white-text">2480 shots</p>#}
+            {#                <div class="separator-line-thick-long bg-transparent-blue margin-one no-margin-bottom center-col margin-lr-auto"></div>#}
+            {#            </div>#}
+        </section>
     {% endfor %}
+    <!-- end subject section -->
+
+    <!-- about section -->
+    <section id="about" class="wow fadeIn no-padding cover-background photography-about background-position-left"
+             style="background-image:url({% static 'images/about-bg.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <!-- section title -->
+                <div class="col-md-6 col-sm-6 text-left margin-thirty-five no-margin-lr no-margin-bottom">
+                    <span class="title-big text-uppercase fast-pink-text alt-font md-title-extra-large-5 sm-title-extra-large-4 xs-title-extra-large-3 font-weight-600">About Origin</span>
+                </div>
+                <!-- end section title -->
+                <!-- text -->
+                <div class="col-md-6 col-sm-6 margin-thirty-five no-margin-lr no-margin-bottom xs-margin-thirty-five xs-no-margin-lr">
+                    <span class="alt-font title-medium text-uppercase photography-quotes xs-title-small font-weight-600">Good Old Flashcards<br> Made awesome new<br><b><u>Digi-Cards</u></b></span>
+                    <div id="about-text-white">
+                        <p class="text-medium width-60 margin-fifteen no-margin-lr sm-width-90"
+                           style="text-align:justify;">
+                            The inspiration for this project dates ⌚ back to January 2018. I always wanted to use
+                            flashcards
+                            for my study 🏫, but going out and buying some flashcards seems
+                            kinda "Nah-🙅‍♂️-Nah" to me, cuz they weren't of my taste 😋. Then I decided to create my
+                            own
+                            flashcards using Adobe Photoshop and have it printed. Then few cards
+                            being done, I just got bored of cutting-->writing-->designing etc. Finally on May 2020 I
+                            just got
+                            it. Why not create website that does the repeating job for me?
+                            Then here I am 😁.
+                        </p>
+                    </div>
+                </div>
+                <!-- end text -->
+            </div>
+        </div>
+    </section>
+    <!-- end about section -->
+
+    <!-- services section -->
+    <section id="services" class="wow fadeIn no-padding cover-background photography-services"
+             style="background-image:url({% static 'images/photography-img6.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <!-- section title -->
+                <div class="col-md-6 col-sm-6 text-left margin-thirty-five no-margin-lr no-margin-bottom xs-margin-nineteen xs-no-margin-lr xs-no-margin-bottom pull-right xs-width-100">
+                    <span class="title-big text-uppercase transparent-green-text alt-font md-title-extra-large-5 sm-title-extra-large-4 xs-title-extra-large-3 font-weight-600">How to?</span>
+                </div>
+                <!-- end section title -->
+                <!--TODO: Create a .gif for how to use the site -->
+                <!-- text -->
+                <div class="col-md-6 col-sm-6 margin-thirty-five no-margin-lr no-margin-bottom xs-margin-twenty-nine xs-no-margin-lr xs-no-margin-bottom pull-left xs-width-100">
+                    <p class="text-medium width-60 margin-fifteen no-margin-lr no-margin-top sm-width-90"
+                       style="text-align:justify;">
+                        Navigation🧭 is set in the hierarchy as <u><b>Subjects👉Units👉Sub👉Units👉Flashcards</b></u>.
+                        Digi-Cards uses MySQL for storage. Why🤔? Because using a SQL database will help relate
+                        flashcards according to our hierarchy.
+
+                        <br><br>
+
+                        You simply create a <b>Subject</b>; Then a <b>Unit</b>; Followed by a <b>Sub Unit</b>; Then at
+                        last the essence, <b>a/many</b> <b>Flashcard(s)</b>.<br>
+
+                        You can manage each items via the backend. Just append <code>/guardian</code> to the URL. It
+                        will take you to the backend portal, where you can manage the entire database.
+                        Flashcards can be also modified via specially designated update page; Just append
+                        <code>/update</code> to the URL of the current flashcard.
+
+                        <br><br>
+
+                        Interested in the <a href="https://github.com/BirnadinErick/Django-Flashcards/"><code>source
+                        code</code></a>? Click the fork to <a
+                            href="https://github.com/BirnadinErick/Digi-Cards/fork"><u>🍴</u></a> me in GitHub! Click
+                        the star to <a href="https://github.com/BirnadinErick/Digi-Cards"><u>🌟</u></a> me! Contribute!
+                        Or you can <a href="https://github.com/BirnadinErick/Digi-Cards/archive/master.zip"><code>download</code></a>
+                        the source code deploy your own one too 🎉!
+                    </p>
+                </div>
+                <!-- end text -->
+            </div>
+        </div>
+    </section>
+    <!-- end services section -->
+
 {% endblock %}
+<!-- end body -->
