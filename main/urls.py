@@ -2,7 +2,7 @@ from django.urls import path
 
 from main.views import *
 
-app_name = 'main'
+app_name = 'digi-cards'
 
 urlpatterns = [
     path('subject/<slug:subject_slug>/', SubjectView.as_view(), name='subject'),  # Subject view called from IndexView

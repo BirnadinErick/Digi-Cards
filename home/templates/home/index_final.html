@@ -7,7 +7,8 @@
             <div class="row">
                 <!-- Logo -->
                 <div class="col-lg-2 col-md-2 navbar-header">
-                    <a class="navbar-brand inner-link" href="#"><img
+                    <a class="navbar-brand inner-link"
+                       href="https://www.youtube.com/channel/UC5Raeh--AL1ReL6B7YmIEYg"><img
                             src="{% static "images/logo-header.png" %}" alt="Crazy Minion"/></a>
                 </div>
             </div>
@@ -17,13 +18,15 @@
 
     {% for subject in subjects %}
         <!-- parallax background -->
-        <section id="{{ subject.title }}" class="no-padding fix-background"
+        <section id="{{ subject.title }}" class="wow fadeIn no-padding fix-background black-overlay"
                  style="background-image:url({{ subject.image.url }});">
             <div class="container full-screen position-relative">
                 <div class="slider-typography text-center">
                     <div class="slider-text-middle-main">
                         <div class="slider-text-middle slider-typography-option1">
-                            <span class="transparent-blue-text alt-font text-uppercase sm-title-extra-large ">{{ subject.title }}</span>
+                            <span class="alt-font text-uppercase sm-title-extra-large "><a
+                                    class={{ css_color | random }}
+                                            href="{% url 'digi-cards:subject' subject.slug %}">{{ subject.title }}</a></span>
                         </div>
                     </div>
                 </div>
@@ -46,7 +49,7 @@
             <div class="row">
                 <!-- section title -->
                 <div class="col-md-6 col-sm-6 text-left margin-thirty-five no-margin-lr no-margin-bottom">
-                    <span class="title-big text-uppercase transparent-green-text alt-font md-title-extra-large-5 sm-title-extra-large-4 xs-title-extra-large-3 font-weight-600">About Origin</span>
+                    <span class="title-big text-uppercase fast-pink-text alt-font md-title-extra-large-5 sm-title-extra-large-4 xs-title-extra-large-3 font-weight-600">About Origin</span>
                 </div>
                 <!-- end section title -->
                 <!-- text -->
@@ -92,7 +95,9 @@
                         Navigation🧭 is set in the hierarchy as <u><b>Subjects👉Units👉Sub👉Units👉Flashcards</b></u>.
                         Digi-Cards uses MySQL for storage. Why🤔? Because using a SQL database will help relate
                         flashcards according to our hierarchy.
+
                         <br><br>
+
                         You simply create a <b>Subject</b>; Then a <b>Unit</b>; Followed by a <b>Sub Unit</b>; Then at
                         last the essence, <b>a/many</b> <b>Flashcard(s)</b>.<br>
 
@@ -100,16 +105,15 @@
                         will take you to the backend portal, where you can manage the entire database.
                         Flashcards can be also modified via specially designated update page; Just append
                         <code>/update</code> to the URL of the current flashcard.
+
                         <br><br>
 
                         Interested in the <a href="https://github.com/BirnadinErick/Django-Flashcards/"><code>source
-                        code</code></a>? Guess what? <a href="https://github.com/BirnadinErick/Digi-Cards/fork">🍴</a>
-                        me in GitHub! <a href="https://github.com/BirnadinErick/Digi-Cards">🌟</a> me! Contribute me!
-                        You can
-                        <a href="https://github.com/BirnadinErick/Digi-Cards/archive/master.zip"><code>download</code></a>
-                        the source
-                        code deploy your own one too 🎉!
-
+                        code</code></a>? Click the fork to <a
+                            href="https://github.com/BirnadinErick/Digi-Cards/fork"><u>🍴</u></a> me in GitHub! Click
+                        the start to <a href="https://github.com/BirnadinErick/Digi-Cards"><u>🌟</u></a> me! Contribute!
+                        Or you can <a href="https://github.com/BirnadinErick/Digi-Cards/archive/master.zip"><code>download</code></a>
+                        the source code deploy your own one too 🎉!
                     </p>
                 </div>
                 <!-- end text -->

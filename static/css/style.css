@@ -478,7 +478,8 @@ h1.page-title {
 }
 
 .fast-pink-text {
-    color: #ff1a56 !important
+    /*color: #ff1a56 !important*/
+    color: rgba(255, 26, 86, .8) !important
 }
 
 .fast-pink-text-dark {
@@ -486,7 +487,7 @@ h1.page-title {
 }
 
 .transparent-blue-text {
-    color: rgba(0, 239, 255, .5) !important
+    color: rgba(0, 239, 255, .8) !important
 }
 
 .transparent-green-text {
@@ -6221,9 +6222,10 @@ footer img {
 
 .photography-quotes:before {
     content: "“";
-    color: #85eea5;
-    font-size: 200px;
+    color: #ff1a56;
+    font-size: 150px;
     position: absolute;
+
 }
 
 .arrow-link {
@@ -6966,4 +6968,15 @@ footer img {
     #about-text-white {
         color: #fff;
     }
+}
+
+@media (max-width: 1000px) {
+    .footer-media-set {
+        background-color: #fff !important;
+        background-image: none !important;
+    }
+}
+
+.black-overlay {
+    background-color: rgba(24, 24, 24, 0.83) !important;
 }

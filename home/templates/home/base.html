@@ -36,8 +36,6 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     <!-- responsive css -->
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}"/>
-    <!-- GitHub Buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js" type="text/javascript"></script>
     <!--[if IE]>
             <script src="{% static 'js/html5shiv.js' %}"></script>
         <![endif]-->
@@ -50,7 +48,8 @@
 {% endblock %}
 
 <!-- footer -->
-<footer class="wow fadeIn cover-background" style="background-image:url({% static 'images/footer-global-bg.jpg' %});">
+<footer class="wow fadeIn cover-background footer-media-set"
+        style="background-image:url({% static 'images/footer-global-bg.jpg' %});">
     <div class="footer-top">
         <div class="container">
             <div class="row">
@@ -65,7 +64,7 @@
 </footer>
 <!-- end footer -->
 <!-- scroll to top -->
-<a href="javascript:;" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
+<a href="javascript:" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
 <!-- end scroll to top -->
 
 <!-- javascript libraries -->

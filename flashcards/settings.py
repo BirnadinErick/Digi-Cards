@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'main.apps.MainConfig',
     'django_ckeditor_5',
+    'imagekit'
 ]
 
 MIDDLEWARE = [

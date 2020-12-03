@@ -1,8 +1,25 @@
+from PIL import Image
 from django.db import models
 from django.db.models.signals import pre_save
 from django_ckeditor_5.fields import CKEditor5Field
+from imagekit.models import ProcessedImageField
 
 from main.utils import slug_generator
+
+
+class ImageResize(object):
+    def process(self, image):
+        width, height = image.size
+        gcd = self._aspect_ratio(width, height)
+        if width // gcd == 16 and (height // gcd == 9 or height // gcd == 10):
+            return image.resize((1920, 1080), Image.ANTIALIAS)
+        else:
+            return image
+
+    def _aspect_ratio(self, w, h):
+        if h == 0:
+            return w
+        return self._aspect_ratio(h, w % h)
 
 
 class Subject(models.Model):
@@ -12,7 +29,11 @@ class Subject(models.Model):
 
     slug = models.SlugField(null=True, blank=True)
     title = models.CharField(max_length=50, unique=True)
-    image = models.ImageField(upload_to='background_img/subject/', blank=False)
+    # image = models.ImageField(upload_to='background_img/subject/', blank=False)
+    image = ProcessedImageField(upload_to='background_img/subject/',
+                                processors=[ImageResize()],
+                                format='JPEG',
+                                options={'quality': 30})
 
     def __str__(self):
         return self.title

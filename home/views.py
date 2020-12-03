@@ -12,3 +12,16 @@ class IndexView(ListView):
     template_name = 'home/index_final.html'  # template to render
     context_object_name = 'subjects'  # output object
     model = Subject
+
+    def get_queryset(self):
+        return Subject.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['css_color'] = ['transparent-blue-text',
+                                'fast-green-text',
+                                'transparent-green-text',
+                                'fast-pink-text-dark',
+                                'fast-pink-text',
+                                ]
+        return context
