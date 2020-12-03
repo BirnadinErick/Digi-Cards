@@ -36,6 +36,8 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     <!-- responsive css -->
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}"/>
+    <!-- GitHub Buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js" type="text/javascript"></script>
     <!--[if IE]>
             <script src="{% static 'js/html5shiv.js' %}"></script>
         <![endif]-->
@@ -48,12 +50,14 @@
 {% endblock %}
 
 <!-- footer -->
-<footer class="wow fadeIn cover-background" style="background-image:url({% static 'images/photography-img40.jpg' %});">
+<footer class="wow fadeIn cover-background" style="background-image:url({% static 'images/footer-global-bg.jpg' %});">
     <div class="footer-top">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12 text-center alt-font margin-three no-margin-lr no-margin-bottom">
-                    <span class="text-small text-uppercase letter-spacing-1">&copy; 2020 Crazy Minion created by Birnadin Erick</span>
+                    <span class="text-small text-uppercase letter-spacing-1">&copy; 2020 <a
+                            href="https://github.com/Crazy-Minion"><b><u>Crazy Minion</u></b></a> created by <a
+                            href="https://github.com/BirnadinErick"><b><u>Birnadin Erick</u></b></a></span>
                 </div>
             </div>
         </div>
@@ -96,6 +100,7 @@
 <script type="text/javascript" src="{% static 'js/counter.js' %}"></script>
 <!-- fit video  -->
 <script type="text/javascript" src="{% static 'js/jquery.fitvids.js' %}"></script>
+
 <!-- setting -->
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 </body>

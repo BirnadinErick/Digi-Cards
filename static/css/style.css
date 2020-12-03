@@ -6961,3 +6961,9 @@ footer img {
     }
 }
 
+/*Custom Styles*/
+@media (min-width: 1200px) {
+    #about-text-white {
+        color: #fff;
+    }
+}
