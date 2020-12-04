@@ -57,6 +57,8 @@ WSGI_APPLICATION = 'flashcards.wsgi.application'
 
 # Database
 
+
+# Password validation
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -67,8 +69,6 @@ DATABASES = {
         'PASSWORD': 'd3ds3c1am',
     }
 }
-
-# Password validation
 
 AUTH_PASSWORD_VALIDATORS = [
     {

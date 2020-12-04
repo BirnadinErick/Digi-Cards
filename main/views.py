@@ -21,8 +21,17 @@ class SubjectView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.subject.title
-        context['subject'] = self.subject
+        context['numbers'] = self._numbers(len(context['units']))
         return context
+
+    @staticmethod
+    def _numbers(num):
+        """
+            Helper private method to generate even numbers within the range of the units found.
+            Helps to differentiate the layouts to render.
+            :param num :type int
+        """
+        return [n for n in range(num + 1) if n % 2 == 0]
 
 
 class UnitView(ListView):
@@ -30,6 +39,7 @@ class UnitView(ListView):
         Unit View
         Inherits ListView from Django Generic Views
         :param unit_slug :type slug
+        :param subject_slug :type slug
     """
 
     template_name = 'main/unit.html'
@@ -50,6 +60,8 @@ class SubUnitView(ListView):
     """
         SubUnit View
         Inherits ListView from Django Generic Views
+        :param unit_slug :type slug
+        :param subject_slug :type slug
         :param subunit_slug :type slug
     """
 
@@ -71,12 +83,19 @@ class FlashcardView(DetailView):
     """
     Flashcard View
     Inherits DetailView from Django Generic Views
-    :param slug :type slug
+    :param unit_slug :type slug
+    :param subject_slug :type slug
+    :param subunit_slug :type slug
+    :param card_slug :type slug
     """
 
     template_name = 'main/flashcard.html'
     context_object_name = 'flashcard'
     model = Flashcard
+
+    def get_queryset(self):
+        self.card = get_object_or_404(Flashcard, slug=self.kwargs['card_slug'])
+        return Flashcard.objects.filter(flashcard=self.card)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

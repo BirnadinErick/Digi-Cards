@@ -6388,11 +6388,20 @@ footer img {
 }
 
 .architecture-title-number {
-    letter-spacing: -5px;
+    letter-spacing: -7px;
     line-height: 74px !important;
     margin: 0;
     padding: 0;
-    right: -7px;
+    left: -13px;
+    top: 16%
+}
+
+.architecture-title-number-odd {
+    letter-spacing: -7px;
+    line-height: 74px !important;
+    margin: 0;
+    padding: 0;
+    right: -13px !important;
     top: 16%
 }
 

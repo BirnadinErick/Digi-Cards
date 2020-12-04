@@ -1,8 +1,168 @@
+<!-- pre-processing -->
 {% extends 'main/base.html' %}
-{% block body_block %}
-    <H1>{{ subject }}</H1>
-    {% for unit in units %}
-        <a href="{% url 'main:unit' unit.slug %}"> {{ unit.title }} </a><br>
-    {% endfor %}
+{% load static %}
+<!-- end pre-processing -->
+
+{% block body %}
+
+    <!-- navigation -->
+    <nav class="navbar no-margin-bottom alt-font without-button transparent-header">
+        <div class="container navigation-menu">
+            <div class="row">
+                <!-- Logo -->
+                <div class="col-lg-2 col-md-2 navbar-header">
+                    <a class="navbar-brand inner-link"
+                       href="https://www.youtube.com/channel/UC5Raeh--AL1ReL6B7YmIEYg"><img
+                            src="{% static "images/logo-header.png" %}" alt="Crazy Minion"/></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- end navigation -->
+
+    <!-- slider -->
+    <!-- TODO: Do something with this slider -->
+    {#    <section id="home" class="no-padding">#}
+    {#        <div class="owl-slider-full owl-carousel owl-theme light-pagination square-pagination dark-pagination-without-next-prev-arrow main-slider">#}
+    {#            <!-- slider item -->#}
+    {#            <div class="item owl-bg-img" style="background-image:url({% static 'images/architecture-img1.jpg' %});">#}
+    {#                <div class="opacity-medium bg-dark-gray"></div>#}
+    {#                <div class="container full-screen position-relative">#}
+    {#                    <div class="col-md-12 slider-typography text-left">#}
+    {#                        <div class="slider-text-middle-main">#}
+    {#                            <div class="slider-text-middle slider-typography-option5">#}
+    {#                                <div class="col-md-1 no-padding">#}
+    {#                                    <div class="bg-crimson-red separator-line-medium-thick xs-margin-thirteen xs-no-margin-lr"></div>#}
+    {#                                </div>#}
+    {#                                <div class="col-md-11 no-padding">#}
+    {#                                    <p class="white-text text-uppercase letter-spacing-2 light-gray-text alt-font margin-four no-margin-lr no-margin-top">#}
+    {#                                        Architecture is inhabited sculpture.</p>#}
+    {#                                    <span class="white-text font-weight-700 letter-spacing-3 alt-font text-uppercase">Architecture begins where engineering ends.</span>#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <!-- end slider item -->#}
+    {#            <!-- slider item -->#}
+    {#            <div class="item owl-bg-img" style="background-image:url({% static 'images/architecture-img2.jpg' %});">#}
+    {#                <div class="opacity-medium bg-dark-gray"></div>#}
+    {#                <div class="container full-screen position-relative">#}
+    {#                    <div class="col-md-12 slider-typography text-left">#}
+    {#                        <div class="slider-text-middle-main">#}
+    {#                            <div class="slider-text-middle slider-typography-option5">#}
+    {#                                <div class="col-md-1 no-padding">#}
+    {#                                    <div class="bg-crimson-red separator-line-medium-thick xs-margin-thirteen xs-no-margin-lr"></div>#}
+    {#                                </div>#}
+    {#                                <div class="col-md-11 no-padding">#}
+    {#                                    <p class="white-text text-uppercase letter-spacing-2 light-gray-text alt-font margin-four no-margin-lr no-margin-top">#}
+    {#                                        Architecture is inhabited sculpture.</p>#}
+    {#                                    <span class="white-text font-weight-700 letter-spacing-3 alt-font text-uppercase">Whatever good things we build end up building us.</span>#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <!-- end slider item -->#}
+    {#            <!-- slider item -->#}
+    {#            <div class="item owl-bg-img" style="background-image:url({% static 'images/architecture-img3.jpg' %});">#}
+    {#                <div class="opacity-medium bg-dark-gray"></div>#}
+    {#                <div class="container full-screen position-relative">#}
+    {#                    <div class="col-md-12 slider-typography text-left">#}
+    {#                        <div class="slider-text-middle-main">#}
+    {#                            <div class="slider-text-middle slider-typography-option5">#}
+    {#                                <div class="col-md-1 no-padding">#}
+    {#                                    <div class="bg-crimson-red separator-line-medium-thick xs-margin-thirteen xs-no-margin-lr"></div>#}
+    {#                                </div>#}
+    {#                                <div class="col-md-11 no-padding">#}
+    {#                                    <p class="white-text text-uppercase letter-spacing-2 light-gray-text alt-font margin-four no-margin-lr no-margin-top">#}
+    {#                                        Architecture is inhabited sculpture.</p>#}
+    {#                                    <span class="white-text font-weight-700 letter-spacing-3 alt-font text-uppercase">Architecture is the art of how to use space.</span>#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <!-- end slider item -->#}
+    {#        </div>#}
+    {#    </section>#}
+    <!-- end slider -->
+
+    <!-- units list section -->
+    <section id="about" class="wow fadeIn no-padding">
+        {% for unit in units %}
+            <!-- logic to display different layouts based on the indices -->
+            {% if forloop.counter in numbers %}
+                <!-- layout for even number indexed units-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- unit title -->
+                        <div class="col-md-6 col-sm-6 col-xs-12 no-padding architecture-title sm-min-height-auto">
+                            <div class="architecture-section">
+                    <span class="title-extra-large alt-font font-weight-700 text-uppercase deep-gray-text display-block sm-title-large"><span
+                            class="crimson-red-text"><small>{{ unit.subject | lower }}</small>/</span> <a
+                            href="{% url 'main:unit' unit.subject.slug unit.slug %}"> {{ unit.title | title }}</a></span>
+                                <h2 class="alt-font text-uppercase font-weight-700 light-gray-text2 md-title-large sm-title-medium xs-br-display-none">
+                                    {{ unit.desc }}</h2>
+                            </div>
+                        </div>
+                        <!-- end unit title -->
+
+                        <!-- unit image -->
+                        <div class="col-md-6 col-sm-6 col-xs-12 no-padding architecture-title cover-background overflow-hidden "
+                             style="background-image:url({{ unit.image.url }});">
+                        <span class="architecture-title-number title-big alt-font font-weight-700 position-absolute white-text">
+                            <!-- Logic to display 0 with the number for styling -->
+                            {% if forloop.counter < 10 %}
+                                0{{ forloop.counter }}
+                            {% else %}
+                                {{ forloop.counter }}
+                            {% endif %}
+                        </span>
+                        </div>
+                        <!-- end unit image -->
+                    </div>
+                </div>
+                <!-- end layout for even number indexed units-->
+            {% else %}
+                <!-- layout for odd number indexed units-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- unit image -->
+                        <div class="col-md-6 col-sm-6 col-xs-12 no-padding architecture-title cover-background overflow-hidden "
+                             style="background-image:url({{ unit.image.url }});">
+                        <span class="architecture-title-number-odd title-big alt-font font-weight-700 position-absolute white-text">
+                            <!-- Logic to display 0 with the number for styling -->
+                            {% if forloop.counter < 10 %}
+                                0{{ forloop.counter }}
+                            {% else %}
+                                {{ forloop.counter }}
+                            {% endif %}
+                        </span>
+                        </div>
+                        <!-- end unit image -->
+
+                        <!-- unit title -->
+                        <div class="col-md-6 col-sm-6 col-xs-12 no-padding architecture-title sm-min-height-auto">
+                            <div class="architecture-section">
+                    <span class="title-extra-large alt-font font-weight-700 text-uppercase deep-gray-text display-block sm-title-large"><span
+                            class="crimson-red-text"><small>{{ unit.subject | lower }}</small>/</span> <a
+                            href="{% url 'main:unit' unit.subject.slug unit.slug %}"> {{ unit.title | title }}</a></span>
+                                <h2 class="alt-font text-uppercase font-weight-700 light-gray-text2 md-title-large sm-title-medium xs-br-display-none">
+                                    {{ unit.desc }}</h2>
+                            </div>
+                        </div>
+                        <!-- end unit title -->
+                    </div>
+                </div>
+                <!-- end layout for odd number indexed units-->
+            {% endif %}
+            <!-- end logic to display different layouts based on the indices -->
+        {% endfor %}
+    </section>
+    <!-- end units list section -->
 
 {% endblock %}

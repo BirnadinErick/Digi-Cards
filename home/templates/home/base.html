@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en" class="no-js">
+
 <head>
     <!-- title -->
     {% if title %}
-        <title>Flashcards:{{ title }}</title>
+        <title>{{ title }} 🎴</title>
     {% else %}
-        <title>Flashcards</title>
+        <title>Digi Cards 🎴</title>
     {% endif %}
 
     <!-- keywords -->
@@ -54,7 +55,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12 text-center alt-font margin-three no-margin-lr no-margin-bottom">
-                    <span class="text-small text-uppercase letter-spacing-1">&copy; 2020 <a
+                    <span class="text-small text-uppercase letter-spacing-1">&copy; {% now "Y" %} <a
                             href="https://github.com/Crazy-Minion"><b><u>Crazy Minion</u></b></a> created by <a
                             href="https://github.com/BirnadinErick"><b><u>Birnadin Erick</u></b></a></span>
                 </div>
@@ -63,6 +64,7 @@
     </div>
 </footer>
 <!-- end footer -->
+
 <!-- scroll to top -->
 <a href="javascript:" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
 <!-- end scroll to top -->
@@ -102,6 +104,7 @@
 
 <!-- setting -->
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
 </body>
 
 </html>

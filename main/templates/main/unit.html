@@ -3,7 +3,8 @@
     <h3>{{ unit.subject.title }}/{{ unit.title }}</h3>
     {% if subunits %}
         {% for subunit in subunits %}
-            <a href="{% url 'main:subunit' subunit.slug %}">{{ subunit.title }}</a><br>
+            <a href="{% url 'main:subunit' subunit.unit.subject.slug subunit.unit.slug subunit.slug %}">{{ subunit.title }}</a>
+            <br>
         {% endfor %}
     {% endif %}
 {% endblock %}

@@ -1,17 +1,118 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="en" class="no-js">
+
 <head>
+    <!-- title -->
     {% if title %}
-        <title>Flashcards:{{ title }}</title>
+        <title>{{ title }} 🎴</title>
     {% else %}
-        <title>Flashcards</title>
+        <title>Digi Cards 🎴</title>
     {% endif %}
+
+    <!-- keywords -->
+    <meta charset="utf-8">
+    <meta name="author" content="Birnadin Erick">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1"/>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{% static '/images/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/apple-touch-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114.png' %}">
+    <!-- animation -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <!-- et line icon -->
+    <link rel="stylesheet" href="{% static 'css/et-line-icons.css' %}"/>
+    <!-- font-awesome icon -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="{% static 'css/owl.transitions.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}"/>
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}"/>
+    <!-- style -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <!-- responsive css -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}"/>
+    <!--[if IE]>
+            <script src="{% static 'js/html5shiv.js' %}"></script>
+        <![endif]-->
 </head>
+
 <body>
-<a href="{% url 'admin:index' %}">Admin</a>
-<h3>HEY from base</h3>
-{% block body_block %}
+
+{% block body %}
+    <!-- contents go in here -->
 {% endblock %}
+
+<!-- footer -->
+<footer class="wow fadeIn">
+    <div class="container sm-container-fluid">
+        <div class="row border-bottom padding-eight no-padding-lr xs-padding-nineteen xs-no-padding-lr">
+            <div class="col-md-12 col-sm-12 text-center">
+                <div class="footer-social position-relative top4 social-icon">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container sm-container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 text-center">
+                    <span class="text-small text-uppercase letter-spacing-1 alt-font">&COPY; {% now "Y" %} <b><a
+                            href="https://github.com/Crazy-Minion">Crazy Minion</a></b> proudly presents <a
+                            href="https://github.com/BirnadinErick/Digi-Cards" target="_blank"><code>Digi Cards.</code></a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+
+<!-- scroll to top -->
+<a href="javascript:" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
+<!-- end scroll to top -->
+
+<!-- javascript libraries -->
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/modernizr.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/skrollr.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/smooth-scroll.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.appear.js' %}"></script>
+<!-- menu navigation -->
+<script type="text/javascript" src="{% static 'js/jquery.nav.js' %}"></script>
+<!-- animation -->
+<script type="text/javascript" src="{% static 'js/wow.min.js' %}"></script>
+<!-- page scroll -->
+<script type="text/javascript" src="{% static 'js/page-scroll.js' %}"></script>
+<!-- owl carousel -->
+<script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
+<!-- counter -->
+<script type="text/javascript" src="{% static 'js/jquery.countTo.js' %}"></script>
+<!-- parallax -->
+<script type="text/javascript" src="{% static 'js/jquery.parallax-1.1.3.js' %}"></script>
+<!-- magnific popup -->
+<script type="text/javascript" src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<!-- portfolio with shorting tab -->
+<script type="text/javascript" src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+<!-- images loaded -->
+<script type="text/javascript" src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+<!-- pull menu -->
+<script type="text/javascript" src="{% static 'js/classie.js' %}"></script>
+<!-- counter  -->
+<script type="text/javascript" src="{% static 'js/counter.js' %}"></script>
+<!-- fit video  -->
+<script type="text/javascript" src="{% static 'js/jquery.fitvids.js' %}"></script>
+
+<!-- setting -->
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
 </body>
+
 </html>

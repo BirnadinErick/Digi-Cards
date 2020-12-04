@@ -7,6 +7,7 @@ from imagekit.models import ProcessedImageField
 from main.utils import slug_generator
 
 
+# Helper Class to preprocess images
 class ImageResize(object):
     def process(self, image):
         width, height = image.size
@@ -29,7 +30,6 @@ class Subject(models.Model):
 
     slug = models.SlugField(null=True, blank=True)
     title = models.CharField(max_length=50, unique=True)
-    # image = models.ImageField(upload_to='background_img/subject/', blank=False)
     image = ProcessedImageField(upload_to='background_img/subject/',
                                 processors=[ImageResize()],
                                 format='JPEG',
@@ -47,7 +47,11 @@ class Unit(models.Model):
     slug = models.SlugField(null=True, blank=True)
     title = models.CharField(max_length=255, unique=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='background_img/unit/', blank=False)
+    image = ProcessedImageField(upload_to='background_img/unit/',
+                                processors=[ImageResize()],
+                                format='JPEG',
+                                options={'quality': 30})
+    desc = models.CharField(max_length=100, blank=False, default="Description for the unit goes here!")
 
     def __str__(self):
         return self.title
@@ -61,7 +65,10 @@ class SubUnit(models.Model):
     slug = models.SlugField(null=True, blank=True)
     title = models.CharField(max_length=255)
     unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='background_img/subunit/', blank=False)
+    image = ProcessedImageField(upload_to='background_img/subunit/',
+                                processors=[ImageResize()],
+                                format='JPEG',
+                                options={'quality': 30})
 
     def __str__(self):
         return self.title
@@ -79,11 +86,16 @@ class Flashcard(models.Model):
     content_brief = CKEditor5Field('content-brief', config_name='extends')
     content_summary = models.TextField()
     cheat_sheet = models.TextField()
-    image = models.ImageField(upload_to='background_img/flashcard/', blank=False)
+    image = ProcessedImageField(upload_to='background_img/card/',
+                                processors=[ImageResize()],
+                                format='JPEG',
+                                options={'quality': 30})
 
     def __str__(self):
         return self.title
 
+
+# ------------------------------------- UTILITY AREA ----------------------------------------------------
 
 # Func. to append slug to the model field
 def slug_appender(sender, instance, *args, **kwargs):

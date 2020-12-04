@@ -4,7 +4,9 @@
     <ol>
         {% for flashcard in flashcards %}
             <li>
-                <h4><a href="{% url 'main:flashcard' flashcard.slug %}">{{ flashcard.title }}</a></h4><br>
+                <h4>
+                    <a href="{% url 'main:flashcard' flashcard.subunit.unit.subject.slug  flashcard.subunit.unit.slug flashcard.subunit.slug flashcard.slug %}">{{ flashcard.title }}</a>
+                </h4><br>
                 <h5>{{ flashcard.description }}</h5>
             </li>
         {% endfor %}
