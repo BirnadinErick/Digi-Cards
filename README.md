@@ -18,6 +18,13 @@ There are 5 models each corresponding to:-
   * Unit
   * Sub Unit
   * Flashcard
+
+## Development Branches
+This repository contains separate brnches to touch up the application.
+**Note**: these branches contain test state application.
+
+That being set, til now (December, 2020) it has following branches:
+  * UI/UX Design : This branch contains new frontend work for the application
   
 ## I hope this will help someone one way or the another. 😉
 A 🙋‍♂️ from Jaffna 😘. 
