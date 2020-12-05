@@ -1,14 +1,52 @@
-{% extends 'main/base.html' %}
-{% block body_block %}
-    <h3>{{ subunit.unit.subject.title }}/</h3><h3>{{ subunit.unit.title }}/</h3>
-    <ol>
+<!DOCTYPE html>
+{% load static %}
+{% load imagekit %}
+<html lang="en-US">
+<head>
+    <title>Sub unit</title>
+    <link rel="stylesheet" href="{% static 'css/vendor.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/theme.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/modernizr.min.js' %}"></script>
+</head>
+<body>
+
+<!-- Digi-Cards list -->
+<div class="container">
+    <div class="row">
         {% for flashcard in flashcards %}
-            <li>
-                <h4>
-                    <a href="{% url 'main:flashcard' flashcard.subunit.unit.subject.slug  flashcard.subunit.unit.slug flashcard.subunit.slug flashcard.slug %}">{{ flashcard.title }}</a>
-                </h4><br>
-                <h5>{{ flashcard.description }}</h5>
-            </li>
+            <!-- Digi-Card -->
+            <div class="col-xl-4 col-sm-6 mb-30 pb-2">
+                <div class="card blog-card mb-2">
+                    <div class="card-body" style="background-image: url({{ flashcard.image.url }});">
+                        <span class="post-format bg-gradient">
+                            <i class="font-family-heading h4 text-white pt-1">“</i>
+                        </span>
+                        <h5 class="post-title">
+                            <a class="text-white" href="#">{{ flashcard.content_summary | truncatewords:10 }}</a>
+                        </h5>
+                        <p class="text-white">Birnadin Erick</p>
+                        <a class="tag-link" href="#">{{ flashcard.subunit.title | upper }}</a>
+                    </div>
+                    <div class="card-footer">
+                        <div class="post-author-name">
+                            <a href="{% url 'main:subject' flashcard.subunit.unit.subject.slug %}">{{ flashcard.subunit.unit.subject.title | title }}</a>
+                            /
+                            <a href="{% url 'main:unit' flashcard.subunit.unit.subject.slug flashcard.subunit.unit.slug %}">{{ flashcard.subunit.unit.title | title }}</a>
+                        </div>
+
+                        <div class="post-meta">
+                            <span><i class="fe-icon-clock"></i>{{ flashcard.last_updated | date:"d M Y" }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end Digi-Card -->
         {% endfor %}
-    </ol>
-{% endblock %}
+
+    </div>
+</div>
+<!-- end Digi-Cards list -->
+<script type="text/javascript" src="{% static 'js/vendor.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/theme.min.js' %}"></script>
+</body>
+</html>

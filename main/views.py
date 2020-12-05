@@ -42,7 +42,7 @@ class UnitView(ListView):
         :param subject_slug :type slug
     """
 
-    template_name = 'main/unit_final.html'
+    template_name = 'main/unit.html'
     context_object_name = 'subunits'
 
     def get_queryset(self):
@@ -74,7 +74,7 @@ class SubUnitView(ListView):
         :param subunit_slug :type slug
     """
 
-    template_name = 'main/subunit.html'
+    template_name = 'main/subunit_final.html'
     context_object_name = 'flashcards'
 
     def get_queryset(self):
@@ -84,7 +84,6 @@ class SubUnitView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.subunit.title
-        context['subunit'] = self.subunit
         return context
 
 
