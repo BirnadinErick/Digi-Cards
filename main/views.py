@@ -42,7 +42,7 @@ class UnitView(ListView):
         :param subject_slug :type slug
     """
 
-    template_name = 'main/unit.html'
+    template_name = 'main/unit_final.html'
     context_object_name = 'subunits'
 
     def get_queryset(self):
@@ -52,8 +52,17 @@ class UnitView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.unit.title
-        context['unit'] = self.unit
+        context['numbers'] = self._numbers(len(context['subunits']))
         return context
+
+    @staticmethod
+    def _numbers(num):
+        """
+            Helper private method to generate even numbers within the range of the units found.
+            Helps to differentiate the layouts to render.
+            :param num :type int
+        """
+        return [n for n in range(num + 1) if n % 2 == 0]
 
 
 class SubUnitView(ListView):

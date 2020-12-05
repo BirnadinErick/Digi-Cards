@@ -69,6 +69,7 @@ class SubUnit(models.Model):
                                 processors=[ImageResize()],
                                 format='JPEG',
                                 options={'quality': 30})
+    desc = models.CharField(max_length=100, blank=False, default="Description for the subunit goes here!")
 
     def __str__(self):
         return self.title
