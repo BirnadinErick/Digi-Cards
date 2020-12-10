@@ -1,4 +1,4 @@
-# Django-Flashcards
+# Digi Cards
 A Django app to digitalize the **flashcards**
 
 ## How to setup
