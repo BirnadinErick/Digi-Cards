@@ -44,7 +44,7 @@
                                                 src="{% static pic_path %}"
                                                 alt=""/></div>
                                         <a href="{% url 'main:subunit' subunit.unit.subject.slug subunit.unit.slug subunit.slug %}"><span
-                                                class="title-large alt-font text-uppercase letter-spacing-2 brown-text display-block font-weight-600">{{ subunit.title | title }}</span></a>
+                                                class="title-large alt-font text-uppercase letter-spacing-2 brown-text display-block font-weight-600">{{ subunit.title | title | truncatechars:10 }}</span></a>
                                         <div class="margin-sixteen"><img src="{% static "images/separator.png" %}"
                                                                          alt=""/>
                                         </div>

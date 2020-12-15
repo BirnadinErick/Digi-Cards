@@ -1,4 +1,5 @@
 from django.contrib import admin
+from markdownx.admin import MarkdownxModelAdmin
 
 from main.models import Subject, Unit, SubUnit, Flashcard
 
@@ -41,6 +42,4 @@ class SubUnitAdmin(admin.ModelAdmin):
         model = SubUnit
 
 
-@admin.register(Flashcard)
-class FlashcardAdmin(admin.ModelAdmin):
-    pass
+admin.site.register(Flashcard, MarkdownxModelAdmin)

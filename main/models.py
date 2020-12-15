@@ -1,8 +1,8 @@
 from PIL import Image
 from django.db import models
 from django.db.models.signals import pre_save
-from django_ckeditor_5.fields import CKEditor5Field
 from imagekit.models import ProcessedImageField
+from markdownx.models import MarkdownxField
 
 from main.utils import slug_generator
 
@@ -84,7 +84,7 @@ class Flashcard(models.Model):
     subunit = models.ForeignKey(SubUnit, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     last_updated = models.DateField()
-    content_brief = CKEditor5Field('content-brief', config_name='extends')
+    content_brief = MarkdownxField()
     content_summary = models.TextField()
     cheat_sheet = models.TextField()
     image = ProcessedImageField(upload_to='background_img/card/',

@@ -74,7 +74,7 @@ class SubUnitView(ListView):
         :param subunit_slug :type slug
     """
 
-    template_name = 'main/subunit_final.html'
+    template_name = 'main/subunit.html'
     context_object_name = 'flashcards'
 
     def get_queryset(self):
