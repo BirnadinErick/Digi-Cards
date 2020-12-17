@@ -85,8 +85,8 @@ class Flashcard(models.Model):
     title = models.CharField(max_length=100)
     last_updated = models.DateField()
     content_brief = MarkdownxField()
-    content_summary = models.TextField()
-    cheat_sheet = models.TextField()
+    content_summary = MarkdownxField()
+    cheat_sheet = MarkdownxField()
     image = ProcessedImageField(upload_to='background_img/card/',
                                 processors=[ImageResize()],
                                 format='JPEG',
