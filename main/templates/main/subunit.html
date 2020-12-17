@@ -141,7 +141,8 @@
 
                         <!-- card body-->
                         <div class="card-body" style="background-image: url({{ flashcard.image.url }});">
-                        <span class="post-format bg-gradient">
+
+                            <span class="post-format bg-gradient">
                             <i class="font-family-heading h4 text-white pt-1">“</i>
                         </span>
                             <h5 class="post-title">
@@ -155,7 +156,7 @@
                         <!-- card body-->
 
                         <!-- card footer -->
-                        <div class="card-footer">
+                        <div class="card-footer" style="z-index:10;">
                             <div class="post-author-name">
                                 <a style="color:#00bac6;"
                                    href="{% url 'main:subject' flashcard.subunit.unit.subject.slug %}">{{ flashcard.subunit.unit.subject.title | title }}</a>
@@ -167,6 +168,7 @@
                             <div class="post-meta">
                                 <span><i class="fe-icon-clock"></i>{{ flashcard.last_updated | date:"d M Y" }}</span>
                             </div>
+
                         </div>
                         <!-- end card footer -->
 

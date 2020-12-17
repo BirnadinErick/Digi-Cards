@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -11,8 +12,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-# Application definition
 
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -23,7 +24,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'main.apps.MainConfig',
     'markdownx',
-    'imagekit'
+    'imagekit',
 ]
 
 MIDDLEWARE = [
@@ -41,7 +42,7 @@ ROOT_URLCONF = 'flashcards.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -57,9 +58,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'flashcards.wsgi.application'
 
 # Database
-
-
-# Password validation
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -71,6 +69,7 @@ DATABASES = {
     }
 }
 
+# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -100,18 +99,43 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 # Media Files
 MEDIA_URL = '/media/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # MarkdownX settings
-MARKDOWNX_UPLOAD_URLS_PATH = '/digi-card-image/upload/'
+
+
 MARKDOWNX_MEDIA_PATH = datetime.now().strftime('digi-card-image/%Y/%m/%d')
+
 MARKDOWNX_UPLOAD_MAX_SIZE = 20 * 1024 * 1024  # 20 MB is allowed upload
+
 MARKDOWNX_UPLOAD_CONTENT_TYPES = ['image/jpeg', 'image/png']
+
 MARKDOWNX_SVG_JAVASCRIPT_PROTECTION = True
+
 MARKDOWNX_EDITOR_RESIZABLE = True
+
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+    'markdown_katex',
+    'markdown_checklist.extension',
+    'markdown_markup_emoji.markup_emoji',
+    'MarkdownHighlight.highlight',
+    'markdown.extensions.codehilite',
+]
+
+MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
+    'markdown.extensions.codehilite': {'use_pygments': True},
+    'markdown.extensions.extra': {},
+    'markdown.extensions.meta': {},
+    'markdown_markup_emoji.markup_emoji': {},
+}
