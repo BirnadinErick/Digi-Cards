@@ -97,11 +97,12 @@ class FlashcardView(DetailView):
     :param card_slug :type slug
     """
 
-    template_name = 'main/flashcard.html'
+    template_name = 'main/flashcard_final.html'
     context_object_name = 'flashcard'
     model = Flashcard
     slug_url_kwarg = 'card_slug'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['related_cards'] = Flashcard.objects.filter(subunit__slug=self.kwargs['subunit_slug'])[:10]
         return context
