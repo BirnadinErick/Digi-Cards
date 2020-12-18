@@ -1,16 +1,20 @@
 {% extends 'main/base.html' %}
-{% block body_block %}
+{% load digiCards %}
+{% block body %}
+
+
+    <h1>{{ hello }}</h1>
 
     <h3>{{ flashcard.subunit.unit.subject.title }}/</h3><h3>{{ flashcard.subunit.unit.title }}/</h3>
     <h3>{{ flashcard.subunit.title }}</h3><br>
     <h4>{{ flashcard.title }}</h4>
     <h5>Brief</h5>
-    <p>{{ flashcard.content_brief|safe }}</p>
+    <p>{{ flashcard.content_brief | htmlfy | safe }}</p>
     <h5>Summary</h5>
-    <p>{{ flashcard.content_summary }}</p>
+    <p>{{ flashcard.content_summary | htmlfy | safe }}</p>
     <h5>Description</h5>
-    <p>{{ flashcard.description }}</p>
+    <p>{{ flashcard.description | htmlfy | safe }}</p>
 
-    <img src="{{ flashcard.image.url }}" alt="Description" width="240">
+    <img src="{{ flashcard.image.url }}" alt="Description">
 
 {% endblock %}

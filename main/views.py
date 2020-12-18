@@ -100,10 +100,7 @@ class FlashcardView(DetailView):
     template_name = 'main/flashcard.html'
     context_object_name = 'flashcard'
     model = Flashcard
-
-    def get_queryset(self):
-        self.card = get_object_or_404(Flashcard, slug=self.kwargs['card_slug'])
-        return Flashcard.objects.filter(flashcard=self.card)
+    slug_url_kwarg = 'card_slug'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
