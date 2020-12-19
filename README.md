@@ -2,10 +2,13 @@
 A Django app to digitalize the **flashcards**
 
 ## How to setup
-* This django app needs the following
-  * python 3.5+
-  * djnago 3+
-  * django-ckeditor-5
+* Digi Cards run on **python 3.5+**(python 3.8.4 64bit) and **django 3.+**(developed in django 3.1.1) 
+* This django app needs the following packages(apps) for extended features apart from usual packages:
+  * markdownx
+  * markdown_katex
+  * markdown_checklist
+  * MarkdownHighlight
+  * imagekit
 * Just like a normal django app run it
 
 ## Database
