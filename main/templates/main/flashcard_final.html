@@ -95,8 +95,34 @@
                     </div>
                     <!-- end cheat sheet -->
 
+                    <!-- YouTube  -->
+                    {% if related_youtube_videos %}
+                        <!-- divider -->
+                        <div class="bg-deep-red separator-line-thick-full no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                        <!-- end divider -->
+                        <div class="widget-media widget">
+                            <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">From Youtube</span><br>
+                            <span class="alt-font">[Note: Search results are being served by youtube API, we don't endorse any advertisements hereby]</span>
+                            <br>
+                            <span class="alt-font" style="color:red;">[Note: Results may be irrelevant and distracting. And may also contain inappropriate results.]</span>
+                            <div class="bg-deep-red separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                            <div class="widget-body">
+                                {% for videoId in related_youtube_videos %}
+                                    <iframe width="560" height="315"
+                                            src="{{ "https://www.youtube-nocookie.com/embed/" | add:videoId }}"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen>
+                                    </iframe>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    {% else %}
+                    {% endif %}
+
+                    <!-- end YouTube  -->
                     <!-- divider -->
-                    <div class="bg-deep-red separator-line-thick-full no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                    <div class="bg-fast-green separator-line-thick-full no-margin-lr md-margin-eleven md-no-margin-lr"></div>
                     <!-- end divider -->
 
                     <!-- edit the card -->
@@ -154,69 +180,53 @@
                     <!-- end subunit desc -->
 
                     <!-- prerequisites  -->
-                    <div class="widget">
-                        <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Prerequisites</span>
-                        <div class="bg-deep-pink separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
-                        <div class="widget-body tags">
-                            {% for requisite in flashcard.prerequisites.all %}
-
-                                <a href="{% url 'main:subunit' requisite.unit.subject.slug requisite.unit.slug requisite.slug %}">{{ requisite.title }}</a>
-
-                            {% endfor %}
-
-
+                    {% if flashcard.prerequisites.all %}
+                        <div class="widget">
+                            <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Prerequisites</span>
+                            <div class="bg-deep-pink separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                            <div class="widget-body tags">
+                                {% for requisite in flashcard.prerequisites.all %}
+                                    <a href="{% url 'main:subunit' requisite.unit.subject.slug requisite.unit.slug requisite.slug %}">{{ requisite.title }}</a>
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
                     <!-- end prerequisites  -->
 
                     <!-- related cards  -->
-                    <div class="widget">
-                        <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Related cards</span>
-                        <div class="bg-deep-green separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
-                        <div class="widget-body">
-                            <ul class="widget-posts">
-                                {% if related_cards %}
+                    {% if related_cards %}
+                        <div class="widget">
+                            <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Related cards</span>
+                            <div class="bg-deep-green separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                            <div class="widget-body">
+                                <ul class="widget-posts">
                                     {% for related_card in related_cards %}
                                         <li>
                                             <a href="{% url 'main:flashcard' related_card.subunit.unit.subject.slug related_card.subunit.unit.slug related_card.subunit.slug related_card.slug %}">{{ related_card.title | title | truncatewords:5 }}</a>
                                             {{ related_card.last_updated }}
                                         </li>
                                     {% endfor %}
-                                {% else %}
-                                    <li style="color:orangered">No cards were found related to this!</li>
-                                {% endif %}
-                            </ul>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
                     <!-- end related cards  -->
 
-                    <!-- YouTube  -->
-                    <div class="widget-media widget">
-                        <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">From Youtube</span>
-                        <div class="bg-deep-red separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
-                        <div class="widget-body">
-                            Nothing! 🙀
-                        </div>
-                        <div class="bg-deep-red separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
-                    </div>
-                    <!-- end YouTube  -->
 
                     <!-- related files  -->
-                    <div class="widget">
-                        <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Related Files</span>
-                        <div class="bg-transparent-deep-blue separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
-                        <div class="widget-body">
-                            <ul class="category-list">
-                                {% if flashcard.related_file %}
+                    {% if flashcard.related_file.all %}
+                        <div class="widget">
+                            <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Related Files</span>
+                            <div class="bg-transparent-deep-blue separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                            <div class="widget-body">
+                                <ul class="category-list">
                                     {% for file in flashcard.related_file.all %}
                                         <li><a href="{{ file.file.url }}" download>{{ file.title }}</a></li>
                                     {% endfor %}
-
-                                {% endif %}
-
-                            </ul>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
                     <!-- end related files  -->
                 </div>
                 <!-- end sidebar -->

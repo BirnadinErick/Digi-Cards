@@ -1,7 +1,9 @@
+import requests
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
 from main.models import *
+from .API_KEY import API_KEY
 
 
 class SubjectView(ListView):
@@ -102,11 +104,22 @@ class FlashcardView(DetailView):
     model = Flashcard
     slug_url_kwarg = 'card_slug'
 
+    @staticmethod
+    def _get_youtube_video(card):
+        try:
+            items = requests.get(
+                f"https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&order=viewCount&q={card.title}&type=video&videoDimension=2d&videoDuration=medium&videoEmbeddable=true&key={API_KEY}").json()[
+                'items']
+        except:
+            return None
+        else:
+            return [id['id']['videoId'] for id in items]
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        related_cards = [card for card in Flashcard.objects.filter(subunit__slug=self.kwargs['subunit_slug'])[:10] if
+        related_cards = [card for card in Flashcard.objects.filter(subunit__slug=self.kwargs['subunit_slug'])[:10]
+                         if
                          card.slug != self.kwargs['card_slug']]
         context['related_cards'] = related_cards
-        # f = context['flashcard'].related_file.all()
-        # print(f[0].file.url)
+        context['related_youtube_videos'] = self._get_youtube_video(context['flashcard'])
         return context

@@ -2,4 +2,4 @@ venv/
 .idea/
 media/
 /media/
-*.credits
+main/API_KEY.py
