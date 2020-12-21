@@ -104,5 +104,9 @@ class FlashcardView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['related_cards'] = Flashcard.objects.filter(subunit__slug=self.kwargs['subunit_slug'])[:10]
+        related_cards = [card for card in Flashcard.objects.filter(subunit__slug=self.kwargs['subunit_slug'])[:10] if
+                         card.slug != self.kwargs['card_slug']]
+        context['related_cards'] = related_cards
+        # f = context['flashcard'].related_file.all()
+        # print(f[0].file.url)
         return context

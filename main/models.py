@@ -75,6 +75,20 @@ class SubUnit(models.Model):
         return self.title
 
 
+class RelatedFile(models.Model):
+    """
+    Model for related file for each flashcard
+    """
+
+    slug = models.SlugField(null=True, blank=True)
+    title = models.CharField(max_length=100, blank=False)
+    desc = models.CharField(max_length=250, blank=True)
+    file = models.FileField(upload_to="related_files/")
+
+    def __str__(self):
+        return self.title
+
+
 class Flashcard(models.Model):
     """
     Model for each flashcard
@@ -87,10 +101,12 @@ class Flashcard(models.Model):
     content_brief = MarkdownxField()
     content_summary = MarkdownxField()
     cheat_sheet = MarkdownxField()
+    prerequisites = models.ManyToManyField(SubUnit, related_name="requirements", blank=True)
     image = ProcessedImageField(upload_to='background_img/card/',
                                 processors=[ImageResize()],
                                 format='JPEG',
                                 options={'quality': 30})
+    related_file = models.ManyToManyField(RelatedFile, blank=True)
 
     def __str__(self):
         return self.title

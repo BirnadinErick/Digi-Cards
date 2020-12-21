@@ -43,12 +43,12 @@
     <!-- end breadcrumb -->
 
     <!-- content -->
-    <section class="wow fadeIn" style="text-align: justify !important;">
+    <section class="wow fadeIn">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-sm-8 blog-listing">
                     <!-- digi-card -->
-                    <article>
+                    <article style="text-align: justify !important;">
                         <div class="margin-ten no-margin-lr">
 
                             <!-- content brief -->
@@ -90,7 +90,7 @@
                     <!-- end divider -->
 
                     <!-- cheat sheet -->
-                    <div class="blog-comment-main xs-no-padding-top">
+                    <div class="blog-comment-main xs-no-padding-top" style="text-align: justify !important;">
                         {{ flashcard.cheat_sheet | htmlfy | safe }}
                     </div>
                     <!-- end cheat sheet -->
@@ -158,10 +158,13 @@
                         <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Prerequisites</span>
                         <div class="bg-deep-pink separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
                         <div class="widget-body tags">
-                            <a href="blog.html">Advertisement</a><a href="blog.html">Fashion</a><a
-                                href="blog.html">Sea</a><a href="blog.html">Forest</a><a href="blog.html">Nature</a><a
-                                href="blog.html">Portrait</a><a href="blog.html">Wordpress</a><a
-                                href="blog.html">Photo</a><a href="blog.html">Sky</a>
+                            {% for requisite in flashcard.prerequisites.all %}
+
+                                <a href="{% url 'main:subunit' requisite.unit.subject.slug requisite.unit.slug requisite.slug %}">{{ requisite.title }}</a>
+
+                            {% endfor %}
+
+
                         </div>
                     </div>
                     <!-- end prerequisites  -->
@@ -172,12 +175,16 @@
                         <div class="bg-deep-green separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
                         <div class="widget-body">
                             <ul class="widget-posts">
-                                {% for related_card in related_cards %}
-                                    <li>
-                                        <a href="{% url 'main:flashcard' related_card.subunit.unit.subject.slug related_card.subunit.unit.slug related_card.subunit.slug related_card.slug %}">{{ related_card.title | title | truncatewords:5 }}</a>
-                                        {{ related_card.last_updated }}
-                                    </li>
-                                {% endfor %}
+                                {% if related_cards %}
+                                    {% for related_card in related_cards %}
+                                        <li>
+                                            <a href="{% url 'main:flashcard' related_card.subunit.unit.subject.slug related_card.subunit.unit.slug related_card.subunit.slug related_card.slug %}">{{ related_card.title | title | truncatewords:5 }}</a>
+                                            {{ related_card.last_updated }}
+                                        </li>
+                                    {% endfor %}
+                                {% else %}
+                                    <li style="color:orangered">No cards were found related to this!</li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
@@ -188,20 +195,7 @@
                         <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">From Youtube</span>
                         <div class="bg-deep-red separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
                         <div class="widget-body">
-                            <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/0qQ36d6XYcE"
-                                    frameborder="2"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen>
-
-                            </iframe>
-                            <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hT_nvWreIhg"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
-                            <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/FM7MFYoylVs"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
+                            Nothing! 🙀
                         </div>
                         <div class="bg-deep-red separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
                     </div>
@@ -213,7 +207,13 @@
                         <div class="bg-transparent-deep-blue separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
                         <div class="widget-body">
                             <ul class="category-list">
-                                <li><a href="#">Placeholder🙄</a></li>
+                                {% if flashcard.related_file %}
+                                    {% for file in flashcard.related_file.all %}
+                                        <li><a href="{{ file.file.url }}" download>{{ file.title }}</a></li>
+                                    {% endfor %}
+
+                                {% endif %}
+
                             </ul>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from markdownx.admin import MarkdownxModelAdmin
 
-from main.models import Subject, Unit, SubUnit, Flashcard
+from main.models import Subject, Unit, SubUnit, Flashcard, RelatedFile
 
 
 #  Sets the models to be used as a inlines
@@ -43,3 +43,4 @@ class SubUnitAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Flashcard, MarkdownxModelAdmin)
+admin.site.register(RelatedFile)
