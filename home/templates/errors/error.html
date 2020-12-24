@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+{% load static %}
+<html class="no-js" lang="en">
+<head>
+    <!-- title -->
+    <title>A broken {{ error_code | safe }} card!</title>
+
+    <!-- description -->
+    <meta name="description" content="Good Old Flashcards Mad Awesome new DIGI CARDS!"/>
+
+    <!-- keywords -->
+    <meta charset="utf-8">
+    <meta name="author" content="Birnadin Erick">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1"/>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{% static '/images/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/apple-touch-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114.png' %}">
+
+    <!-- css libs -->
+    <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static "css/style_app.css" %}" type="text/css"/>
+    <!-- end css libs -->
+</head>
+<body>
+
+<!-- header -->
+<header class="header">
+    <div class="container">
+        <div class="logo-container">
+            <img class="logo" src="{% static "images/logo-header.png" %}" alt="Crazy Minion">
+        </div>
+    </div>
+</header>
+<!-- end header -->
+
+<!-- content -->
+<section class="main">
+    <ul id="scene" class="scene">
+        <!-- background image -->
+        <li class="layer" data-depth="0.20">
+            <div class="hero-background"></div>
+        </li>
+        <!-- end background image -->
+
+        <li class="layer" data-depth="0.40">
+            <div class="level-1 object-1">
+                <img src="{% static "images/error/app/level-1/ellipse_fill_1.png" %}"
+                     alt="Something wrong with error page too!">
+            </div>
+            <div class="level-1 object-2">
+                <img src="{% static "images/error/app/level-1/ellipse_fill_3.png" %}"
+                     alt="Something wrong with error page too!">
+            </div>
+            <div class="level-1 object-3">
+                <img src="{% static "images/error/app/level-1/ellipse_fill_4.png" %}"
+                     alt="Something wrong with error page too!">
+            </div>
+            <div class="level-1 object-4">
+                <img src="{% static "images/error/app/level-1/line.png" %}" alt="Something wrong with error page too!">
+            </div>
+        </li>
+
+        <li class="layer" data-depth="0.60">
+            <div class="level-2 object-1">
+                <img src="{% static "images/error/app/level-2/ellipse_2.png" %}"
+                     alt="Something wrong with error page too!">
+            </div>
+            <div class="level-2 object-2">
+                <img src="{% static "images/error/app/level-2/ellipse_3.png" %}"
+                     alt="Something wrong with error page too!">
+            </div>
+            <div class="level-2 object-3">
+                <img src="{% static "images/error/app/level-2/ellipse_fill_2.png" %}"
+                     alt="Something wrong with error page too!">
+            </div>
+        </li>
+
+        <li class="layer" data-depth="0.80">
+            <div class="level-3 object-1">
+                <img src="{% static "images/error/app/level-3/ellipse.png" %}"
+                     alt="Something wrong with error page too!">
+            </div>
+            <div class="level-3 object-2">
+                <img src="{% static "images/error/app/level-3/ellipse_4.png" %}"
+                     alt="Something wrong with error page too!">
+            </div>
+            <div class="level-3 object-3">
+                <img src="{% static "images/error/app/level-3/line_2.png" %}"
+                     alt="Something wrong with error page too!">
+            </div>
+        </li>
+
+        <li class="layer" data-depth="0.00">
+            <div class="main_content">
+                <h2 class="error-big-text main-font">{{ error_code | safe }}</h2>
+                <p class="error-sub-text main-font">{{ error_msg | title | safe }}</p>
+                <a href="{% url "home:index" %}" class="btn btn-light btn-rounded main-font">Go Home</a>
+            </div>
+        </li>
+    </ul>
+</section>
+<!-- end content -->
+
+<!-- footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="copy">Crazy Minion &copy; {% now "Y" %}</div>
+    </div>
+</footer>
+<!-- footer -->
+
+<!-- JS libs -->
+<script type="text/javascript" src="{% static "js/modernizr.js" %}"></script>
+<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/jquery.parallax-1.1.3.js" %}"></script>
+<script type="text/javascript" src="{% static "js/script.js" %}"></script>
+<!-- end JS libs -->
+</body>
+</html>

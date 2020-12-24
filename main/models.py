@@ -35,6 +35,9 @@ class Subject(models.Model):
                                 format='JPEG',
                                 options={'quality': 30})
 
+    class Meta:
+        ordering = ("title",)
+
     def __str__(self):
         return self.title
 
@@ -51,7 +54,11 @@ class Unit(models.Model):
                                 processors=[ImageResize()],
                                 format='JPEG',
                                 options={'quality': 30})
-    desc = models.CharField(max_length=100, blank=False, default="Description for the unit goes here!")
+    desc = models.CharField(max_length=100, blank=False, default="Description for the unit goes here!",
+                            verbose_name="Description")
+
+    class Meta:
+        ordering = ("subject", "title")
 
     def __str__(self):
         return self.title
@@ -69,7 +76,11 @@ class SubUnit(models.Model):
                                 processors=[ImageResize()],
                                 format='JPEG',
                                 options={'quality': 30})
-    desc = models.CharField(max_length=100, blank=False, default="Description for the subunit goes here!")
+    desc = models.CharField(max_length=100, blank=False, default="Description for the subunit goes here!",
+                            verbose_name="Description")
+
+    class Meta:
+        ordering = ("unit", "title")
 
     def __str__(self):
         return self.title
@@ -82,8 +93,7 @@ class RelatedFile(models.Model):
 
     slug = models.SlugField(null=True, blank=True)
     title = models.CharField(max_length=100, blank=False)
-    desc = models.CharField(max_length=250, blank=True)
-    file = models.FileField(upload_to="related_files/")
+    file = models.FileField(upload_to="related_files/", blank=False)
 
     def __str__(self):
         return self.title
@@ -97,7 +107,7 @@ class Flashcard(models.Model):
     slug = models.SlugField(null=True, blank=True)
     subunit = models.ForeignKey(SubUnit, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    last_updated = models.DateField()
+    last_updated = models.DateField(blank=True)
     content_brief = MarkdownxField()
     content_summary = MarkdownxField()
     cheat_sheet = MarkdownxField()
@@ -108,8 +118,15 @@ class Flashcard(models.Model):
                                 options={'quality': 30})
     related_file = models.ManyToManyField(RelatedFile, blank=True)
 
+    class Meta:
+        ordering = ("subunit", "last_updated", "title")
+
     def __str__(self):
         return self.title
+
+    @property
+    def change_url(self):
+        return f"/guardian/main/flashcard/{self.id}/change/"
 
 
 # ------------------------------------- UTILITY AREA ----------------------------------------------------
@@ -120,8 +137,16 @@ def slug_appender(sender, instance, *args, **kwargs):
         instance.slug = slug_generator(instance)
 
 
+# Func. to update the last_updated field of a digi-card
+def last_update_check(sender, instance, *args, **kwargs):
+    import datetime
+    now = datetime.datetime.now()
+    instance.last_updated = now
+
+
 # Signal manager to trigger slug generation
 pre_save.connect(slug_appender, sender=Subject)
 pre_save.connect(slug_appender, sender=Unit)
 pre_save.connect(slug_appender, sender=SubUnit)
 pre_save.connect(slug_appender, sender=Flashcard)
+pre_save.connect(last_update_check, sender=Flashcard)

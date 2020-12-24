@@ -130,7 +130,7 @@
                         <span class="text-extra-large text-uppercase alt-font dark-gray-text display-block margin-ten no-margin-lr no-margin-top font-weight-600">Edit the Flashcard</span>
                         <div class="blog-comment-form">
                             <!-- button  -->
-                            <a href="{% url 'home:index' %}">
+                            <a href="{{ flashcard.change_url }}">
                                 <button type="submit" class="highlight-button-green btn btn-medium"
                                         style="color: black !important;">Let me edit!
                                 </button>

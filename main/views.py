@@ -122,4 +122,5 @@ class FlashcardView(DetailView):
                          card.slug != self.kwargs['card_slug']]
         context['related_cards'] = related_cards
         context['related_youtube_videos'] = self._get_youtube_video(context['flashcard'])
+        context['title'] = context['flashcard'].title
         return context

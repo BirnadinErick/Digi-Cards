@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 
 from main.models import Subject
 
@@ -25,3 +25,17 @@ class IndexView(ListView):
                                 'fast-pink-text',
                                 ]
         return context
+
+
+class Http400Error(TemplateView):
+    template_name = 'errors/error.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['error_code'] = "404"
+        context['error_msg'] = "Oops!💣 You are lost! Actually how'd you end up here?🤔"
+        return context
+
+
+if __name__ != "__main__":
+    view404 = Http400Error.as_view()
