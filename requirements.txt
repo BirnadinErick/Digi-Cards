@@ -9,3 +9,7 @@ Pillow==8.0.1
 pytz==2020.4
 six==1.15.0
 sqlparse==0.4.1
+extensions==3.4
+extensions-meta-data==3.4
+extensions-abbreviations==3.3
+extensions-footnotes==3.4
