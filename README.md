@@ -12,7 +12,7 @@ A Django app to digitalize the **flashcards**
 * Just like a normal django app run it
 
 ## Database
-Django-Flashcards uses MySQL(MariaDB) as its main database.
+Digi-Cards uses MySQL(MariaDB) as its main database.
 
 ## Cache
 Digi-Cards is intergrated with Memcached to handle the caching. It uses to Memcached server, one for backend and another one for frontend(especially rendered log .md files).
