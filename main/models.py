@@ -88,7 +88,7 @@ class SubUnit(models.Model):
 
 class RelatedFile(models.Model):
     """
-    Model for related file for each flashcard
+    Model for related file for each :model:'main.Flashcard'
     """
 
     slug = models.SlugField(null=True, blank=True)

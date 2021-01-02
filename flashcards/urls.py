@@ -11,6 +11,7 @@ handler404 = 'home.views.view404'
 handler500 = 'home.views.view500'
 
 urlpatterns = [
+                  path('guardian/doc', include('django.contrib.admindocs.urls')),
                   path('guardian/', admin.site.urls),
                   path('', include('home.urls', namespace='home')),
                   path('digi-cards/', include('main.urls', namespace='main')),

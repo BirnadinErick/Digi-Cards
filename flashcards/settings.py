@@ -1,13 +1,14 @@
 import os
 from datetime import datetime
 from pathlib import Path
+from .credits import (SECRET_KEY, DB_PASSWORD, DB_USER)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = '4+fdn@cu5n2029x!$of8l=gq_3qy7(yvftk!cia3_1a5u30grk'
+SECRET_KEY = SECRET_KEY
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -20,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admindocs',
     'home.apps.HomeConfig',
     'main.apps.MainConfig',
     'markdownx',
@@ -28,8 +30,8 @@ INSTALLED_APPS = [
 
 ROOT_URLCONF = 'flashcards.urls'
 MIDDLEWARE = [
-    # 'django.middleware.cache.UpdateCacheMiddleware',
-    # 'htmlmin.middleware.HtmlMinifyMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -38,8 +40,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'django.middleware.cache.FetchFromCacheMiddleware',
-    # 'htmlmin.middleware.MarkRequestMiddleware'
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    'htmlmin.middleware.MarkRequestMiddleware'
 ]
 
 TEMPLATES = [
@@ -67,8 +69,8 @@ DATABASES = {
         'NAME': 'flashcards_web',
         'HOST': '127.0.0.1',
         'PORT': '3306',
-        'USER': 'birnadin',
-        'PASSWORD': 'd3ds3c1am',
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD ,
     }
 }
 
@@ -116,7 +118,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # MarkdownX settings
 MARKDOWNX_MEDIA_PATH = datetime.now().strftime('digi-card-image/%Y/%m/%d')
 
-MARKDOWNX_UPLOAD_MAX_SIZE = 20 * 1024 * 1024  # 20 MB is allowed upload
+MARKDOWNX_UPLOAD_MAX_SIZE = 10 * 1024 * 1024  # 20 MB is allowed upload
 
 MARKDOWNX_UPLOAD_CONTENT_TYPES = ['image/jpeg', 'image/png']
 
@@ -143,19 +145,19 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
 # Whitenoise settings
 WHITENOISE_AUTOREFRESH = True
 
-# # Cache Setting
-# SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#         'LOCATION': '127.0.0.1:2004',
-#     },
-#     'frontend': {
-#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#         'LOCATION': '127.0.0.1:2005',
-#
-#     }
-# }
+# Cache Setting
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:2004',
+    },
+    'frontend': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:2005',
+
+    }
+}
 
 # htmlmin settings
-# HTML_MINIFY = True
+HTML_MINIFY = True

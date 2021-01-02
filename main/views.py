@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
 from main.models import *
-from .API_KEY import API_KEY
+from flashcards.credits import API_KEY
 
 
 class SubjectView(ListView):
@@ -71,7 +71,7 @@ class UnitView(ListView):
 
 class SubUnitView(ListView):
     """
-        SubUnit View
+        :view:'main.SubUnit' View
         Inherits ListView from Django Generic Views
         :param unit_slug :type slug
         :param subject_slug :type slug
