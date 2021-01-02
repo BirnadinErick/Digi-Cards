@@ -1,45 +1,53 @@
 import os
+from datetime import datetime
 from pathlib import Path
+from .credits import (SECRET_KEY, DB_PASSWORD, DB_USER)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = '4+fdn@cu5n2029x!$of8l=gq_3qy7(yvftk!cia3_1a5u30grk'
+SECRET_KEY = SECRET_KEY
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
-
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admindocs',
     'home.apps.HomeConfig',
     'main.apps.MainConfig',
-    'django_ckeditor_5',
+    'markdownx',
+    'imagekit',
 ]
 
+ROOT_URLCONF = 'flashcards.urls'
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    'htmlmin.middleware.MarkRequestMiddleware'
 ]
-
-ROOT_URLCONF = 'flashcards.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -55,20 +63,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'flashcards.wsgi.application'
 
 # Database
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'flashcards_web',
         'HOST': '127.0.0.1',
         'PORT': '3306',
-        'USER': 'birnadin',
-        'PASSWORD': 'd3ds3c1am',
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD ,
     }
 }
 
 # Password validation
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -98,93 +104,60 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+#     os.path.join(BASE_DIR, 'home', 'static')
+# ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Media Files
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-# CKEDITOR SETTINGS
-customColorPalette = [
-    {
-        'color': 'hsl(4, 90%, 58%)',
-        'label': 'Red'
-    },
-    {
-        'color': 'hsl(340, 82%, 52%)',
-        'label': 'Pink'
-    },
-    {
-        'color': 'hsl(291, 64%, 42%)',
-        'label': 'Purple'
-    },
-    {
-        'color': 'hsl(262, 52%, 47%)',
-        'label': 'Deep Purple'
-    },
-    {
-        'color': 'hsl(231, 48%, 48%)',
-        'label': 'Indigo'
-    },
-    {
-        'color': 'hsl(207, 90%, 54%)',
-        'label': 'Blue'
-    },
+# MarkdownX settings
+MARKDOWNX_MEDIA_PATH = datetime.now().strftime('digi-card-image/%Y/%m/%d')
+
+MARKDOWNX_UPLOAD_MAX_SIZE = 10 * 1024 * 1024  # 20 MB is allowed upload
+
+MARKDOWNX_UPLOAD_CONTENT_TYPES = ['image/jpeg', 'image/png']
+
+MARKDOWNX_SVG_JAVASCRIPT_PROTECTION = True
+
+MARKDOWNX_EDITOR_RESIZABLE = True
+
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+    'markdown_katex',
+    'markdown_checklist.extension',
+    'markdown_markup_emoji.markup_emoji',
+    'MarkdownHighlight.highlight',
+    'markdown.extensions.codehilite',
 ]
 
-# CKEDITOR_5_CUSTOM_CSS = 'path_to.css' # optional
-CKEDITOR_5_CONFIGS = {
+MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
+    'markdown.extensions.codehilite': {'use_pygments': True},
+    'markdown.extensions.extra': {},
+    'markdown.extensions.meta': {},
+    'markdown_markup_emoji.markup_emoji': {},
+}
+
+# Whitenoise settings
+WHITENOISE_AUTOREFRESH = True
+
+# Cache Setting
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+CACHES = {
     'default': {
-        'toolbar': ['heading', '|', 'bold', 'italic', 'link',
-                    'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
-
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:2004',
     },
-    'extends': {
-        'blockToolbar': [
-            'paragraph', 'heading1', 'heading2', 'heading3',
-            '|',
-            'bulletedList', 'numberedList',
-            '|',
-            'blockQuote', 'imageUpload'
-        ],
-        'toolbar': ['heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
-                    'code', 'subscript', 'superscript', 'highlight', '|',
-                    'bulletedList', 'numberedList', 'todoList', '|', 'blockQuote', 'imageUpload', '|',
-                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
-                    'insertTable', ],
-        'image': {
-            'toolbar': ['imageTextAlternative', 'imageTitle', '|', 'imageStyle:alignLeft', 'imageStyle:full',
-                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side', '|'],
-            'styles': [
-                'full',
-                'side',
-                'alignLeft',
-                'alignRight',
-                'alignCenter',
-            ]
+    'frontend': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:2005',
 
-        },
-        'table': {
-            'contentToolbar': ['tableColumn', 'tableRow', 'mergeTableCells',
-                               'tableProperties', 'tableCellProperties'],
-            'tableProperties': {
-                'borderColors': customColorPalette,
-                'backgroundColors': customColorPalette
-            },
-            'tableCellProperties': {
-                'borderColors': customColorPalette,
-                'backgroundColors': customColorPalette
-            }
-        },
-        'heading': {
-            'options': [
-                {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},
-                {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1'},
-                {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2'},
-                {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'}
-            ]
-        }
     }
 }
+
+# htmlmin settings
+HTML_MINIFY = True

@@ -1,17 +1,122 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="en" class="no-js">
+
 <head>
+    <!-- title -->
     {% if title %}
-        <title>Flashcards:{{ title }}</title>
+        <title>{{ title | upper }}</title>
     {% else %}
-        <title>Flashcards</title>
+        <title>Digi Cards</title>
     {% endif %}
+    <!-- end title -->
+
+    <!-- keywords -->
+    <meta charset="utf-8">
+    <meta name="author" content="Birnadin Erick">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1"/>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{% static '/images/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/apple-touch-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114.png' %}">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}"/>
+    <!-- font-awesome icon -->
+    <link rel="stylesheet" href="{% static 'main/css/font-awesome.min.css' %}"/>
+    <!-- style -->
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}"/>
+    <!-- responsive css -->
+    <link rel="stylesheet" href="{% static 'main/css/responsive.css' %}"/>
+
 </head>
+
 <body>
-<a href="{% url 'admin:index' %}">Admin</a>
-<h3>HEY from base</h3>
-{% block body_block %}
+
+<!-- navigation -->
+<nav class="navbar no-margin-bottom alt-font without-button transparent-header">
+    <div class="container navigation-menu">
+        <div class="row">
+            <!-- Logo -->
+            <div class="col-lg-2 col-md-2 navbar-header">
+                <a class="navbar-brand inner-link"
+                   href="https://www.youtube.com/channel/UC5Raeh--AL1ReL6B7YmIEYg"><img
+                        src="{% static "images/logo-header.png" %}" alt="Crazy Minion"/></a>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- end navigation -->
+
+{% block body %}
+    <!-- contents go in here -->
 {% endblock %}
+
+<!-- footer -->
+<footer class="wow fadeIn">
+    <div class="container sm-container-fluid">
+        <div class="row border-bottom padding-eight no-padding-lr xs-padding-nineteen xs-no-padding-lr">
+            <div class="col-md-12 col-sm-12 text-center">
+                <div class="footer-social position-relative top4 social-icon">
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container sm-container-fluid">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 text-center">
+                    <span class="text-small text-uppercase letter-spacing-1 alt-font">&COPY; {% now "Y" %} <b><a
+                            href="https://github.com/Crazy-Minion">Crazy Minion</a></b> proudly presents <a
+                            href="https://github.com/BirnadinErick/Digi-Cards" target="_blank"><code>Digi Cards.</code></a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
+
+{#<!-- scroll to top -->#}
+{#<a href="javascript:" class="scrollToTop"><i class="fa fa-angle-up"></i></a>#}
+{#<!-- end scroll to top -->#}
+
+<!-- javascript libraries -->
+<script type="text/javascript" src="{% static 'main/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/modernizr.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/jquery.easing.1.3.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/skrollr.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/smooth-scroll.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/js/jquery.appear.js' %}"></script>
+{#<!-- menu navigation -->#}
+<script type="text/javascript" src="{% static 'main/js/jquery.nav.js' %}"></script>
+<!-- animation -->
+<script type="text/javascript" src="{% static 'main/js/wow.min.js' %}"></script>
+<!-- page scroll -->
+<script type="text/javascript" src="{% static 'main/js/page-scroll.js' %}"></script>
+<!-- owl carousel -->
+<script type="text/javascript" src="{% static 'main/js/owl.carousel.min.js' %}"></script>
+<!-- counter -->
+<script type="text/javascript" src="{% static 'main/js/jquery.countTo.js' %}"></script>
+<!-- parallax -->
+<script type="text/javascript" src="{% static 'main/js/jquery.parallax-1.1.3.js' %}"></script>
+<!-- magnific popup -->
+<script type="text/javascript" src="{% static 'main/js/jquery.magnific-popup.min.js' %}"></script>
+<!-- portfolio with shorting tab -->
+<script type="text/javascript" src="{% static 'main/js/isotope.pkgd.min.js' %}"></script>
+<!-- images loaded -->
+<script type="text/javascript" src="{% static 'main/js/imagesloaded.pkgd.min.js' %}"></script>
+<!-- pull menu -->
+<script type="text/javascript" src="{% static 'main/js/classie.js' %}"></script>
+<!-- counter  -->
+<script type="text/javascript" src="{% static 'main/js/counter.js' %}"></script>
+<!-- fit video  -->
+<script type="text/javascript" src="{% static 'main/js/jquery.fitvids.js' %}"></script>
+<!-- setting -->
+<script type="text/javascript" src="{% static 'main/js/main.js' %}"></script>
+
 </body>
+
 </html>

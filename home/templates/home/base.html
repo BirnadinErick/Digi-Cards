@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en" class="no-js">
+
 <head>
     <!-- title -->
-    {% if title %}
-        <title>Flashcards:{{ title }}</title>
-    {% else %}
-        <title>Flashcards</title>
-    {% endif %}
+    <title>Digi Cards</title>
 
     <!-- keywords -->
     <meta charset="utf-8">
@@ -19,26 +16,12 @@
     <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon-57x57.png' %}">
     <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/apple-touch-icon-72x72.png' %}">
     <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114.png' %}">
-    <!-- animation -->
-    <link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
     <!-- bootstrap -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
-    <!-- et line icon -->
-    <link rel="stylesheet" href="{% static 'css/et-line-icons.css' %}"/>
-    <!-- font-awesome icon -->
-    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
-    <!-- owl carousel -->
-    <link rel="stylesheet" href="{% static 'css/owl.transitions.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}"/>
-    <!-- magnific popup -->
-    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}"/>
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}"/>
     <!-- style -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}"/>
     <!-- responsive css -->
-    <link rel="stylesheet" href="{% static 'css/responsive.css' %}"/>
-    <!--[if IE]>
-            <script src="{% static 'js/html5shiv.js' %}"></script>
-        <![endif]-->
+    <link rel="stylesheet" href="{% static 'home/css/responsive.css' %}"/>
 </head>
 
 <body>
@@ -48,56 +31,28 @@
 {% endblock %}
 
 <!-- footer -->
-<footer class="wow fadeIn cover-background" style="background-image:url({% static 'images/photography-img40.jpg' %});">
+<footer class="wow fadeIn cover-background footer-media-set"
+        style="background-image:url({% static 'home/images/footer-global-bg.jpg' %});">
     <div class="footer-top">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12 text-center alt-font margin-three no-margin-lr no-margin-bottom">
-                    <span class="text-small text-uppercase letter-spacing-1">&copy; 2020 Crazy Minion created by Birnadin Erick</span>
+                    <span class="text-small text-uppercase letter-spacing-1">&copy; {% now "Y" %} <a
+                            href="https://github.com/Crazy-Minion" target="_blank"><b><u>Crazy Minion</u></b></a> created by <a
+                            href="https://github.com/BirnadinErick"
+                            target="_blank"><b><u>Birnadin Erick</u></b></a></span>
                 </div>
             </div>
         </div>
     </div>
 </footer>
 <!-- end footer -->
-<!-- scroll to top -->
-<a href="javascript:;" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
-<!-- end scroll to top -->
 
 <!-- javascript libraries -->
-<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/modernizr.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/jquery.easing.1.3.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/skrollr.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/smooth-scroll.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/jquery.appear.js' %}"></script>
-<!-- menu navigation -->
-<script type="text/javascript" src="{% static 'js/jquery.nav.js' %}"></script>
-<!-- animation -->
-<script type="text/javascript" src="{% static 'js/wow.min.js' %}"></script>
-<!-- page scroll -->
-<script type="text/javascript" src="{% static 'js/page-scroll.js' %}"></script>
-<!-- owl carousel -->
-<script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
-<!-- counter -->
-<script type="text/javascript" src="{% static 'js/jquery.countTo.js' %}"></script>
-<!-- parallax -->
-<script type="text/javascript" src="{% static 'js/jquery.parallax-1.1.3.js' %}"></script>
-<!-- magnific popup -->
-<script type="text/javascript" src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-<!-- portfolio with shorting tab -->
-<script type="text/javascript" src="{% static 'js/isotope.pkgd.min.js' %}"></script>
-<!-- images loaded -->
-<script type="text/javascript" src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
-<!-- pull menu -->
-<script type="text/javascript" src="{% static 'js/classie.js' %}"></script>
-<!-- counter  -->
-<script type="text/javascript" src="{% static 'js/counter.js' %}"></script>
-<!-- fit video  -->
-<script type="text/javascript" src="{% static 'js/jquery.fitvids.js' %}"></script>
-<!-- setting -->
-<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+<script type="text/javascript" src="{% static 'home/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'home/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'home/js/main.js' %}"></script>
+<!-- end javascript libraries -->
 </body>
 
 </html>
