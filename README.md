@@ -14,6 +14,9 @@ A Django app to digitalize the **flashcards**
 ## Database
 Django-Flashcards uses MySQL(MariaDB) as its main database.
 
+## Cache
+Digi-Cards is intergrated with Memcached to handle the caching. It uses to Memcached server, one for backend and another one for frontend(especially rendered log .md files).
+
 ## Models
 **models.py** inside the main application contains the schema for all the models.
 There are 5 models each corresponding to:-
@@ -27,7 +30,7 @@ This repository contains separate brnches to touch up the application.
 **Note**: these branches contain test state application.
 
 That being said, until now (December, 2020) it has following branches:
-  * UI/UX Design : This branch contains new frontend work for the application
+  * UI/UX Design : This branch contains new frontend work for the application (Done working, v1.0 is out!)
   
 ## I hope this will help someone one way or the another. 😉
 A 🙋‍♂️ from Jaffna 😘. 
