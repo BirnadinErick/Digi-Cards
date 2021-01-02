@@ -17,6 +17,7 @@ class SubjectView(ListView):
     context_object_name = 'units'
 
     def get_queryset(self):
+        # noinspection PyAttributeOutsideInit
         self.subject = get_object_or_404(Subject, slug=self.kwargs['subject_slug'])
         return Unit.objects.filter(subject=self.subject)
 
@@ -48,6 +49,7 @@ class UnitView(ListView):
     context_object_name = 'subunits'
 
     def get_queryset(self):
+        # noinspection PyAttributeOutsideInit
         self.unit = get_object_or_404(Unit, slug=self.kwargs['unit_slug'])
         return SubUnit.objects.filter(unit=self.unit)
 
@@ -80,6 +82,7 @@ class SubUnitView(ListView):
     context_object_name = 'flashcards'
 
     def get_queryset(self):
+        # noinspection PyAttributeOutsideInit
         self.subunit = get_object_or_404(SubUnit, slug=self.kwargs['subunit_slug'])
         return Flashcard.objects.filter(subunit=self.subunit)
 
@@ -89,6 +92,7 @@ class SubUnitView(ListView):
         return context
 
 
+# noinspection PyBroadException
 class FlashcardView(DetailView):
     """
     Flashcard View
@@ -99,11 +103,12 @@ class FlashcardView(DetailView):
     :param card_slug :type slug
     """
 
-    template_name = 'main/flashcard_final.html'
+    template_name = 'main/flashcard.html'
     context_object_name = 'flashcard'
     model = Flashcard
     slug_url_kwarg = 'card_slug'
 
+    # noinspection PyShadowingBuiltins
     @staticmethod
     def _get_youtube_video(card):
         try:

@@ -1,20 +1,226 @@
 {% extends 'main/base.html' %}
+{% load static %}
+{#{% load cache %}#}
 {% load digiCards %}
 {% block body %}
 
+    <!-- page title -->
+    <section class="page-title parallax2 parallax-fix wow fadeIn">
+        <img class="parallax-background-img" src="{{ flashcard.image.url }}"
+             alt="{{ flashcard.title | truncatewords:2 | lower }}"/>
 
-    <h1>{{ hello }}</h1>
+        <div class="opacity-full bg-deep-blue3"></div>
 
-    <h3>{{ flashcard.subunit.unit.subject.title }}/</h3><h3>{{ flashcard.subunit.unit.title }}/</h3>
-    <h3>{{ flashcard.subunit.title }}</h3><br>
-    <h4>{{ flashcard.title }}</h4>
-    <h5>Brief</h5>
-    <p>{{ flashcard.content_brief | htmlfy | safe }}</p>
-    <h5>Summary</h5>
-    <p>{{ flashcard.content_summary | htmlfy | safe }}</p>
-    <h5>Description</h5>
-    <p>{{ flashcard.description | htmlfy | safe }}</p>
+        <div class="container position-relative">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 text-center">
+                    <h2 class="alt-font white-text font-weight-600 xs-title-extra-large">
+                        {{ flashcard.title | upper }}
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end page title -->
 
-    <img src="{{ flashcard.image.url }}" alt="Description">
+    <!-- breadcrumb -->
+    <div class="breadcrumb alt-font">
+        <div class="container">
+            <ul>
+                <li>
+                    <a href="{% url 'home:index' %}">
+                        HOME
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'main:subject' flashcard.subunit.unit.subject.slug %}">
+                        {{ flashcard.subunit.unit.subject.title | upper }}
+                    </a>
+                </li>
 
+            </ul>
+        </div>
+    </div>
+    <!-- end breadcrumb -->
+
+    <!-- content -->
+    <section class="wow fadeIn">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-8 blog-listing">
+                    <!-- digi-card -->
+                    <article style="text-align: justify !important;">
+                        <div class="margin-ten no-margin-lr">
+                            <!-- content brief -->
+                            {{ flashcard.content_brief | htmlfy | safe }}
+                            <!-- end content brief -->
+
+                            <!-- divider -->
+                            <div class="bg-fast-yellow separator-line-thick-full no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                            <!-- end divider -->
+
+                            <div class="text-center bg-gray">
+                                <div class="blog-comment text-left clearfix no-margin padding-ten">
+
+                                    <!-- card image -->
+                                    <img class="comment-avtar no-margin-top" style="border-radius: 3px !important;"
+                                         alt="{{ flashcard.slug }}"
+                                         src="{{ flashcard.image.url }}"/>
+                                    <!-- end card image -->
+
+                                    <!-- summary -->
+                                    <div class="comment-text overflow-hidden position-relative">
+                                        <h5 class="alt-font text-large dark-gray-text font-weight-600"><a href="#">Summary</a>
+                                        </h5>
+                                        <p class="alt-font text-uppercase text-small">{{ flashcard.title | title }}</p>
+                                        <div class="no-margin" style="text-align: justify !important;">
+                                            {{ flashcard.content_summary | htmlfy | safe }}
+                                        </div>
+                                    </div>
+                                    <!-- end summary -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- end digi-card -->
+
+                    <!-- divider -->
+                    <div class="bg-deep-orange separator-line-thick-full no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                    <!-- end divider -->
+
+                    <!-- cheat sheet -->
+                    <div class="blog-comment-main xs-no-padding-top" style="text-align: justify !important;">
+                        {{ flashcard.cheat_sheet | htmlfy | safe }}
+                    </div>
+                    <!-- end cheat sheet -->
+
+                    <!-- YouTube  -->
+                    {% if related_youtube_videos %}
+                        <!-- divider -->
+                        <div class="bg-deep-red separator-line-thick-full no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                        <!-- end divider -->
+                        <div class="widget-media widget">
+                            <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">From Youtube</span><br>
+                            <span class="alt-font">[Note: Search results are being served by youtube API, we don't endorse any advertisements hereby]</span>
+                            <br>
+                            <span class="alt-font" style="color:red;">[Note: Results may be irrelevant and distracting. And may also contain inappropriate results.]</span>
+                            <div class="bg-deep-red separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                            <div class="widget-body">
+                                {% for videoId in related_youtube_videos %}
+                                    <iframe width="560" height="315"
+                                            src="{{ "https://www.youtube-nocookie.com/embed/" | add:videoId }}"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen>
+                                    </iframe>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    {% else %}
+                    {% endif %}
+
+                    <!-- end YouTube  -->
+                    <!-- divider -->
+                    <div class="bg-fast-green separator-line-thick-full no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                    <!-- end divider -->
+
+                    <!-- edit the card -->
+                    <div id="addcomment" class="xs-margin-thirty-five xs-no-margin-lr xs-no-margin-top">
+                        <span class="text-extra-large text-uppercase alt-font dark-gray-text display-block margin-ten no-margin-lr no-margin-top font-weight-600">Edit the Flashcard</span>
+                        <div class="blog-comment-form">
+                            <!-- button  -->
+                            <a href="{{ flashcard.change_url }}">
+                                <button type="submit" class="highlight-button-green btn btn-medium"
+                                        style="color: black !important;">Let me edit!
+                                </button>
+                            </a>
+                            <!-- end button  -->
+                        </div>
+                    </div>
+                    <!-- end edit the card -->
+
+                </div>
+
+                <!-- sidebar TODO: Make sidebar static-->
+                <div class="col-md-3 col-md-offset-1 col-sm-4">
+
+                    <!-- unit desc  -->
+                    <div class="widget">
+                        <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Unit:<a
+                                href="{% url 'main:unit' flashcard.subunit.unit.subject.slug flashcard.subunit.unit.slug %}"> {{ flashcard.subunit.unit.title | title }}</a></span>
+                        <div class="bg-deep-blue separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                        <div class="widget-body">
+                            <p>{{ flashcard.subunit.unit.desc }}</p>
+                        </div>
+                    </div>
+                    <!-- end unit desc  -->
+
+                    <!-- subunit desc -->
+                    <div class="widget">
+                        <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">SubUnit:<a
+                                href="{% url 'main:subunit' flashcard.subunit.unit.subject.slug flashcard.subunit.unit.slug flashcard.subunit.slug %}"> {{ flashcard.subunit.title | title }}</a></span>
+                        <div class="bg-deep-orange separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                        <div class="widget-body">
+
+                            <p style="text-align:justify !important;">{{ flashcard.subunit.desc }}</p>
+                        </div>
+                    </div>
+                    <!-- end subunit desc -->
+
+                    <!-- prerequisites  -->
+                    {% if flashcard.prerequisites.all %}
+                        <div class="widget">
+                            <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Prerequisites</span>
+                            <div class="bg-deep-pink separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                            <div class="widget-body tags">
+                                {% for requisite in flashcard.prerequisites.all %}
+                                    <a href="{% url 'main:subunit' requisite.unit.subject.slug requisite.unit.slug requisite.slug %}">{{ requisite.title }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <!-- end prerequisites  -->
+
+                    <!-- related cards  -->
+                    {% if related_cards %}
+                        <div class="widget">
+                            <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Related cards</span>
+                            <div class="bg-deep-green separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                            <div class="widget-body">
+                                <ul class="widget-posts">
+                                    {% for related_card in related_cards %}
+                                        <li>
+                                            <a href="{% url 'main:flashcard' related_card.subunit.unit.subject.slug related_card.subunit.unit.slug related_card.subunit.slug related_card.slug %}">{{ related_card.title | title | truncatewords:5 }}</a>
+                                            {{ related_card.last_updated }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <!-- end related cards  -->
+
+
+                    <!-- related files  -->
+                    {% if flashcard.related_file.all %}
+                        <div class="widget">
+                            <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Related Files</span>
+                            <div class="bg-transparent-deep-blue separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                            <div class="widget-body">
+                                <ul class="category-list">
+                                    {% for file in flashcard.related_file.all %}
+                                        <li><a href="{{ file.file.url }}" download>{{ file.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <!-- end related files  -->
+                </div>
+                <!-- end sidebar -->
+            </div>
+        </div>
+    </section>
+    <!-- end content -->
 {% endblock %}

@@ -5,11 +5,11 @@
 
 {% block body %}
     <!--suppress HtmlUnknownAnchorTarget -->
-    <body style="background-image:url({% static 'images/restaurant-img7.jpg' %});">
+    <body style="background-image:url({% static 'main/images/unit-bg.jpg' %});">
 
     <!-- hero -->
     <section id="home" class="no-padding fix-background"
-             style="background-image:url({% static 'images/subunit-hero.png' %});">
+             style="background-image:url({% static 'main/images/unit-hero.png' %});">
         <div class="opacity-light bg-dark-gray"></div>
         <div class="container full-screen position-relative">
             <div class="slider-typography text-center">
@@ -20,8 +20,7 @@
             </div>
         </div>
         <div class="scroll-down"><a class="section-link" href="#0">
-
-            <img src="{% static "images/arrow-down.png" %}" alt=""/></a>
+            <img src="{% static "main/images/arrow-down.png" %}" alt=""/></a>
         </div>
     </section>
     <!-- end hero -->
@@ -29,7 +28,7 @@
     {% for subunit in subunits %}
         {% cycle 'border-color-fast-pink-dark' 'border-deep-yellow' 'border-color-orange' 'border-transperent-green' as border_color silent %}
         {% cycle 'BalletDoodle.png' 'DogJumpDoodle.png' 'CoffeeDoddle.png' 'DancingDoodle.png' 'DoogieDoodle.png' 'DumpingDoodle.png' 'FloatDoodle.png' 'GroovyDoodle.png' 'GroovySittingDoodle.png' 'LayingDoodle.png' 'MessyDoodle.png' 'MoshingDoodle.png' 'PlantDoodle.png' 'ReadingDoodle.png' 'ReadingSideDoodle.png' 'RollerSkatingDoodle.png' 'RollingDoodle.png' 'SelfieDoodle.png' 'SitReadingDoodle.png' 'SittingDoodle.png' 'SleekDoodle.png' 'SprintingDoodle.png' 'StrollingDoodle.png' 'SwingingDoodle.png' 'UnboxingDoodle.png' 'ZombieingDoodle.png' as pic silent %}
-        {% with 'graphics/'|add:pic as pic_path %}
+        {% with 'main/graphics/'|add:pic as pic_path %}
             {% if forloop.counter in numbers %}
                 <!-- even indexed sub unit section -->
                 <section id="{{ forloop.counter0 }}"
@@ -45,14 +44,23 @@
                                                 alt=""/></div>
                                         <a href="{% url 'main:subunit' subunit.unit.subject.slug subunit.unit.slug subunit.slug %}"><span
                                                 class="title-large alt-font text-uppercase letter-spacing-2 brown-text display-block font-weight-600">{{ subunit.title | title | truncatechars:10 }}</span></a>
-                                        <div class="margin-sixteen"><img src="{% static "images/separator.png" %}"
+                                        <div class="margin-sixteen"><img src="{% static "main/images/separator.png" %}"
                                                                          alt=""/>
                                         </div>
                                         <p class="text-medium margin-five no-margin-lr">{{ subunit.desc | lower }}</p>
-                                        <div class="margin-seventeen"><a class="section-link"
-                                                                         href="#{{ forloop.counter0 | add:1 }}"><img
-                                                src="{% static "images/arrow-down.png" %}"
-                                                alt="go to next subunit"/></a>
+                                        <div class="margin-seventeen">
+                                            <a class="section-link" href="#{{ forloop.counter0 | add:1 }}">
+                                                {% if forloop.last %}
+                                                    <img
+                                                            src="{% static "main/images/arrow-down.png" %}"
+                                                            alt="go to next subunit"
+                                                            style="transform: rotateZ(180deg)"/>
+                                                {% else %}
+                                                    <img
+                                                            src="{% static "main/images/arrow-down.png" %}"
+                                                            alt="go to next subunit"/>
+                                                {% endif %}
+                                            </a>
                                         </div>
                                         <div class="img-border {{ border_color }} z-index-minus2"></div>
                                     </div>
@@ -77,14 +85,23 @@
                                                     src="{% static pic_path %}" alt=""/></div>
                                         <a href="{% url 'main:subunit' subunit.unit.subject.slug subunit.unit.slug subunit.slug %}"><span
                                                 class="title-large alt-font text-uppercase letter-spacing-2 brown-text display-block font-weight-600">{{ subunit.title | title }}</span></a>
-                                        <div class="margin-sixteen"><img src="{% static "images/separator2.png" %}"
+                                        <div class="margin-sixteen"><img src="{% static "main/images/separator2.png" %}"
                                                                          alt=""/>
                                         </div>
                                         <p class="text-medium margin-five no-margin-lr">{{ subunit.desc | lower }}</p>
-                                        <div class="margin-seventeen"><a class="section-link"
-                                                                         href="#{{ forloop.counter0 | add:1 }}"><img
-                                                src="{% static "images/arrow-down.png" %}"
-                                                alt="go to next subunit"/></a>
+                                        <div class="margin-seventeen">
+                                            <a class="section-link" href="#{{ forloop.counter0 | add:1 }}">
+                                                {% if forloop.last %}
+                                                    <img
+                                                            src="{% static "main/images/arrow-down.png" %}"
+                                                            alt="go to next subunit"
+                                                            style="transform: rotateY(180deg)"/>
+                                                {% else %}
+                                                    <img
+                                                            src="{% static "main/images/arrow-down.png" %}"
+                                                            alt="go to next subunit"/>
+                                                {% endif %}
+                                            </a>
                                         </div>
                                         <div class="img-border {{ border_color }} z-index-minus2"></div>
                                     </div>
@@ -97,6 +114,5 @@
             {% endif %}
         {% endwith %}
     {% endfor %}
-
     </body>
 {% endblock %}

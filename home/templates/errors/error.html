@@ -21,7 +21,7 @@
 
     <!-- css libs -->
     <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}" type="text/css"/>
-    <link rel="stylesheet" href="{% static "css/style_app.css" %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static "errors/css/style_app.css" %}" type="text/css"/>
     <!-- end css libs -->
 </head>
 <body>
@@ -30,7 +30,9 @@
 <header class="header">
     <div class="container">
         <div class="logo-container">
-            <img class="logo" src="{% static "images/logo-header.png" %}" alt="Crazy Minion">
+            <a href="https://www.youtube.com/channel/UC5Raeh--AL1ReL6B7YmIEYg" target="_blank">
+                <img class="logo" src="{% static "images/logo-header.png" %}" alt="Crazy Minion">
+            </a>
         </div>
     </div>
 </header>
@@ -41,58 +43,14 @@
     <ul id="scene" class="scene">
         <!-- background image -->
         <li class="layer" data-depth="0.20">
-            <div class="hero-background"></div>
+            {% with 'errors/img/'|add:error_code|add:".jpg" as pic_name %}
+                <div class="hero-background"
+                     style="background: url({% static pic_name %}) center center no-repeat #EEEFF1;">
+
+                </div>
+            {% endwith %}
         </li>
         <!-- end background image -->
-
-        <li class="layer" data-depth="0.40">
-            <div class="level-1 object-1">
-                <img src="{% static "images/error/app/level-1/ellipse_fill_1.png" %}"
-                     alt="Something wrong with error page too!">
-            </div>
-            <div class="level-1 object-2">
-                <img src="{% static "images/error/app/level-1/ellipse_fill_3.png" %}"
-                     alt="Something wrong with error page too!">
-            </div>
-            <div class="level-1 object-3">
-                <img src="{% static "images/error/app/level-1/ellipse_fill_4.png" %}"
-                     alt="Something wrong with error page too!">
-            </div>
-            <div class="level-1 object-4">
-                <img src="{% static "images/error/app/level-1/line.png" %}" alt="Something wrong with error page too!">
-            </div>
-        </li>
-
-        <li class="layer" data-depth="0.60">
-            <div class="level-2 object-1">
-                <img src="{% static "images/error/app/level-2/ellipse_2.png" %}"
-                     alt="Something wrong with error page too!">
-            </div>
-            <div class="level-2 object-2">
-                <img src="{% static "images/error/app/level-2/ellipse_3.png" %}"
-                     alt="Something wrong with error page too!">
-            </div>
-            <div class="level-2 object-3">
-                <img src="{% static "images/error/app/level-2/ellipse_fill_2.png" %}"
-                     alt="Something wrong with error page too!">
-            </div>
-        </li>
-
-        <li class="layer" data-depth="0.80">
-            <div class="level-3 object-1">
-                <img src="{% static "images/error/app/level-3/ellipse.png" %}"
-                     alt="Something wrong with error page too!">
-            </div>
-            <div class="level-3 object-2">
-                <img src="{% static "images/error/app/level-3/ellipse_4.png" %}"
-                     alt="Something wrong with error page too!">
-            </div>
-            <div class="level-3 object-3">
-                <img src="{% static "images/error/app/level-3/line_2.png" %}"
-                     alt="Something wrong with error page too!">
-            </div>
-        </li>
-
         <li class="layer" data-depth="0.00">
             <div class="main_content">
                 <h2 class="error-big-text main-font">{{ error_code | safe }}</h2>
@@ -113,10 +71,8 @@
 <!-- footer -->
 
 <!-- JS libs -->
-<script type="text/javascript" src="{% static "js/modernizr.js" %}"></script>
-<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
-<script type="text/javascript" src="{% static "js/jquery.parallax-1.1.3.js" %}"></script>
-<script type="text/javascript" src="{% static "js/script.js" %}"></script>
+<script type="text/javascript" src="{% static "home/js/jquery.min.js" %}"></script>
+<script type="text/javascript" src="{% static "errors/js/script.js" %}"></script>
 <!-- end JS libs -->
 </body>
 </html>

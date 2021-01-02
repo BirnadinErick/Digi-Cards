@@ -181,6 +181,5 @@
         s = s.replace(/-+$/g, ''); // trim any trailing hyphens
         return s;
     }
-
     window.URLify = URLify;
 }

@@ -1,4 +1,5 @@
-from django.views.generic import ListView, TemplateView
+from django.shortcuts import render
+from django.views.generic import ListView
 
 from main.models import Subject
 
@@ -6,7 +7,8 @@ from main.models import Subject
 class IndexView(ListView):
     """
     View that serves the index
-    TODO: Add a feature to render no of units in subject
+    :model:Subject
+    :template_path:home/index.html
     """
 
     template_name = 'home/index.html'  # template to render
@@ -27,15 +29,33 @@ class IndexView(ListView):
         return context
 
 
-class Http400Error(TemplateView):
-    template_name = 'errors/error.html'
+# Custom Error Views
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['error_code'] = "404"
-        context['error_msg'] = "Oops!💣 You are lost! Actually how'd you end up here?🤔"
-        return context
+def view400(request, *args, **kwargs):
+    return render(request,
+                  template_name='errors/error.html',
+                  context={'error_code': "400",
+                           'error_msg': "Watch what you ask for! Don't talk ĴeßʁɫŞĦ  to me!"},
+                  status=400)
 
 
-if __name__ != "__main__":
-    view404 = Http400Error.as_view()
+def view403(request, *args, **kwargs):
+    return render(request,
+                  template_name='errors/error.html',
+                  context={'error_code': "403",
+                           'error_msg': "Seems like outta your reach sweetie😎!"},
+                  status=403)
+
+
+def view404(request, *args, **kwargs):
+    return render(request,
+                  template_name='errors/error.html',
+                  context={'error_code': "404", 'error_msg': "Oops!💣 You are lost! Actually how'd you end up here?🤔"},
+                  status=404)
+
+
+def view500(request):
+    return render(request,
+                  template_name='errors/error.html',
+                  context={'error_code': "500", 'error_msg': "Sorry, had a party last Nyt🌃, I am so fucked 🆙."},
+                  status=500)

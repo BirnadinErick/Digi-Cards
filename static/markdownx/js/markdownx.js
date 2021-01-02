@@ -18,7 +18,6 @@
         }
         return n[o].exports;
     }
-
     var i = typeof require == "function" && require;
     for (var o = 0; o < r.length; o++) s(r[o]);
     return s;
@@ -34,7 +33,7 @@
             RESIZABILITY_ATTRIBUTE = "data-markdownx-editor-resizable", LATENCY_ATTRIBUTE = "data-markdownx-latency",
             LATENCY_MINIMUM = 500, XHR_RESPONSE_ERROR = "Invalid response", UPLOAD_START_OPACITY = "0.3",
             NORMAL_OPACITY = "1";
-        let EventHandlers = {
+        var EventHandlers = {
             inhibitDefault: function (event) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -45,7 +44,7 @@
                 return EventHandlers.inhibitDefault(event);
             }
         };
-        let keyboardEvents = {
+        var keyboardEvents = {
             keys: {
                 TAB: "Tab",
                 DUPLICATE: "d",
@@ -125,11 +124,9 @@
                 }
             }
         };
-
         function getHeight(element) {
             return Math.max(parseInt(window.getComputedStyle(element).height), parseInt(element.style.height) || 0);
         }
-
         function updateHeight(editor) {
             if (editor.scrollTop) editor.style.height = editor.scrollTop + getHeight(editor) + "px";
             return editor;
@@ -300,7 +297,7 @@
                     readyList = [];
                 }
             };
-            let readyStateChange = function () {
+            var readyStateChange = function () {
                 return document.readyState === "complete" ? ready() : null;
             };
             baseObj[funcName] = function (callback, context) {
@@ -358,15 +355,13 @@
             }
             return null;
         }
-
         exports.getCookie = getCookie;
-
         function zip() {
             var rows = [];
             for (var _i = 0; _i < arguments.length; _i++) {
                 rows[_i] = arguments[_i];
             }
-            if (rows[0].constructor === Array) return rows[0].slice().map(function (_, c) {
+            if (rows[0].constructor == Array) return rows[0].slice().map(function (_, c) {
                 return rows.map(function (row) {
                     return row[c];
                 });
@@ -382,9 +377,7 @@
                 });
             });
         }
-
         exports.zip = zip;
-
         function mountEvents() {
             var collections = [];
             for (var _i = 0; _i < arguments.length; _i++) {
@@ -396,9 +389,7 @@
                 });
             });
         }
-
         exports.mountEvents = mountEvents;
-
         function preparePostData(data, csrf) {
             if (csrf === void 0) {
                 csrf = true;
@@ -414,9 +405,7 @@
             });
             return form;
         }
-
         exports.preparePostData = preparePostData;
-
         function AJAXRequest() {
             if ("XMLHttpRequest" in window) return new XMLHttpRequest();
             try {
@@ -435,7 +424,7 @@
             throw new TypeError("This browser does not support AJAX requests.");
         }
 
-        let Request = function () {
+        var Request = function () {
             function Request(url, data) {
                 this.xhr = AJAXRequest();
                 this.url = url;
@@ -464,8 +453,8 @@
                     ERROR(_this.xhr.responseText);
                 };
                 this.xhr.onload = function (event) {
-                    let data = null;
-                    if (_this.xhr.readyState === XMLHttpRequest.DONE) {
+                    var data = null;
+                    if (_this.xhr.readyState == XMLHttpRequest.DONE) {
                         if (!_this.xhr.responseType || _this.xhr.responseType === "text") {
                             data = _this.xhr.responseText;
                         } else if (_this.xhr.responseType === "document") {
@@ -481,15 +470,12 @@
             return Request;
         }();
         exports.Request = Request;
-
         function triggerEvent(element, type) {
             var event = document.createEvent("HTMLEvents");
             event.initEvent(type, false, true);
             element.dispatchEvent(event);
         }
-
         exports.triggerEvent = triggerEvent;
-
         function triggerCustomEvent(type, element, args) {
             if (element === void 0) {
                 element = document;
@@ -502,9 +488,7 @@
             });
             element.dispatchEvent(event);
         }
-
         exports.triggerCustomEvent = triggerCustomEvent;
-
         function addClass(element) {
             var className = [];
             for (var _i = 1; _i < arguments.length; _i++) {
@@ -518,9 +502,7 @@
                 }
             });
         }
-
         exports.addClass = addClass;
-
         function removeClass(element) {
             var className = [];
             for (var _i = 1; _i < arguments.length; _i++) {
