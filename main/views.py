@@ -24,17 +24,8 @@ class SubjectView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.subject.title
-        context['numbers'] = self._numbers(len(context['units']))
+        context['parent_image_url'] = self.subject.image.url
         return context
-
-    @staticmethod
-    def _numbers(num):
-        """
-            Helper private method to generate even numbers within the range of the units found.
-            Helps to differentiate the layouts to render.
-            :param num :type int
-        """
-        return [n for n in range(num + 1) if n % 2 == 0]
 
 
 class UnitView(ListView):
@@ -56,17 +47,7 @@ class UnitView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.unit.title
-        context['numbers'] = self._numbers(len(context['subunits']))
         return context
-
-    @staticmethod
-    def _numbers(num):
-        """
-            Helper private method to generate even numbers within the range of the units found.
-            Helps to differentiate the layouts to render.
-            :param num :type int
-        """
-        return [n for n in range(num + 1) if n % 2 == 0]
 
 
 class SubUnitView(ListView):

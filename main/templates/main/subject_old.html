@@ -1,0 +1,80 @@
+<!-- pre-processing -->
+{% extends 'main/base.html' %}
+{% load static %}
+<!-- end pre-processing -->
+
+{% block body %}
+    <!-- units list section -->
+    <section id="about" class="wow fadeIn no-padding">
+        {% for unit in units %}
+            <!-- logic to display different layouts based on the indices -->
+            {% if forloop.counter in numbers %}
+                <!-- layout for even number indexed units-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- unit title -->
+                        <div class="col-md-6 col-sm-6 col-xs-12 no-padding architecture-title sm-min-height-auto">
+                            <div class="architecture-section">
+                    <span class="title-extra-large alt-font font-weight-700 text-uppercase deep-gray-text display-block sm-title-large"><span
+                            class="crimson-red-text"><small>{{ unit.subject | lower }}</small>/</span> <a
+                            href="{% url 'main:unit' unit.subject.slug unit.slug %}"> {{ unit.title | title }}</a></span>
+                                <h2 class="alt-font text-uppercase font-weight-700 light-gray-text2 md-title-large sm-title-medium xs-br-display-none">
+                                    {{ unit.desc }}</h2>
+                            </div>
+                        </div>
+                        <!-- end unit title -->
+
+                        <!-- unit image -->
+                        <div class="col-md-6 col-sm-6 col-xs-12 no-padding architecture-title cover-background overflow-hidden "
+                             style="background-image:url({{ unit.image.url }});">
+                        <span class="architecture-title-number title-big alt-font font-weight-700 position-absolute white-text">
+                            <!-- Logic to display 0 with the number for styling -->
+                            {% if forloop.counter < 10 %}
+                                0{{ forloop.counter }}
+                            {% else %}
+                                {{ forloop.counter }}
+                            {% endif %}
+                        </span>
+                        </div>
+                        <!-- end unit image -->
+                    </div>
+                </div>
+                <!-- end layout for even number indexed units-->
+            {% else %}
+                <!-- layout for odd number indexed units-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- unit image -->
+                        <div class="col-md-6 col-sm-6 col-xs-12 no-padding architecture-title cover-background overflow-hidden "
+                             style="background-image:url({{ unit.image.url }});">
+                        <span class="architecture-title-number-odd title-big alt-font font-weight-700 position-absolute white-text">
+                            <!-- Logic to display 0 with the number for styling -->
+                            {% if forloop.counter < 10 %}
+                                0{{ forloop.counter }}
+                            {% else %}
+                                {{ forloop.counter }}
+                            {% endif %}
+                        </span>
+                        </div>
+                        <!-- end unit image -->
+
+                        <!-- unit title -->
+                        <div class="col-md-6 col-sm-6 col-xs-12 no-padding architecture-title sm-min-height-auto">
+                            <div class="architecture-section">
+                    <span class="title-extra-large alt-font font-weight-700 text-uppercase deep-gray-text display-block sm-title-large"><span
+                            class="crimson-red-text"><small>{{ unit.subject | lower }}</small>/</span> <a
+                            href="{% url 'main:unit' unit.subject.slug unit.slug %}"> {{ unit.title | title }}</a></span>
+                                <h2 class="alt-font text-uppercase font-weight-700 light-gray-text2 md-title-large sm-title-medium xs-br-display-none">
+                                    {{ unit.desc }}</h2>
+                            </div>
+                        </div>
+                        <!-- end unit title -->
+                    </div>
+                </div>
+                <!-- end layout for odd number indexed units-->
+            {% endif %}
+            <!-- end logic to display different layouts based on the indices -->
+        {% endfor %}
+    </section>
+    <!-- end units list section -->
+{% endblock %}

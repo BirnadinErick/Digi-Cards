@@ -1,6 +1,6 @@
-{% extends 'main/base.html' %}
+{% extends 'main/card_base.html' %}
 {% load static %}
-{#{% load cache %}#}
+{% load cache %}
 {% load digiCards %}
 {% block body %}
 
@@ -51,9 +51,11 @@
                     <!-- digi-card -->
                     <article style="text-align: justify !important;">
                         <div class="margin-ten no-margin-lr">
+                            {% cache 1200 brief flashcard.slug using="frontend" %}
                             <!-- content brief -->
                             {{ flashcard.content_brief | htmlfy | safe }}
                             <!-- end content brief -->
+                            {% endcache %}
 
                             <!-- divider -->
                             <div class="bg-fast-yellow separator-line-thick-full no-margin-lr md-margin-eleven md-no-margin-lr"></div>
@@ -74,7 +76,9 @@
                                         </h5>
                                         <p class="alt-font text-uppercase text-small">{{ flashcard.title | title }}</p>
                                         <div class="no-margin" style="text-align: justify !important;">
+                                            {% cache 1200 summary flashcard.slug using="frontend" %}
                                             {{ flashcard.content_summary | htmlfy | safe }}
+                                            {% endcache %}
                                         </div>
                                     </div>
                                     <!-- end summary -->
@@ -91,7 +95,9 @@
 
                     <!-- cheat sheet -->
                     <div class="blog-comment-main xs-no-padding-top" style="text-align: justify !important;">
+                        {% cache 1200 cheat flashcard.slug using="frontend" %}
                         {{ flashcard.cheat_sheet | htmlfy | safe }}
+                        {% endcache %}
                     </div>
                     <!-- end cheat sheet -->
 
@@ -173,11 +179,13 @@
                         <div class="widget">
                             <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Prerequisites</span>
                             <div class="bg-deep-pink separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
+                            {% cache 1200 pre flashcard.slug using="frontend" %}
                             <div class="widget-body tags">
                                 {% for requisite in flashcard.prerequisites.all %}
                                     <a href="{% url 'main:subunit' requisite.unit.subject.slug requisite.unit.slug requisite.slug %}">{{ requisite.title }}</a>
                                 {% endfor %}
                             </div>
+                        {% endcache %}
                         </div>
                     {% endif %}
                     <!-- end prerequisites  -->
@@ -188,6 +196,7 @@
                             <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Related cards</span>
                             <div class="bg-deep-green separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
                             <div class="widget-body">
+                            {% cache 1200 related flashcard.slug using="frontend" %}
                                 <ul class="widget-posts">
                                     {% for related_card in related_cards %}
                                         <li>
@@ -196,6 +205,7 @@
                                         </li>
                                     {% endfor %}
                                 </ul>
+                            {% endcache %}
                             </div>
                         </div>
                     {% endif %}
@@ -208,11 +218,13 @@
                             <span class="alt-font text-uppercase dark-gray-text font-weight-600 text-large">Related Files</span>
                             <div class="bg-transparent-deep-blue separator-line-thick no-margin-lr md-margin-eleven md-no-margin-lr"></div>
                             <div class="widget-body">
+                            {% cache 1200 files flashcard.slug using="frontend" %}
                                 <ul class="category-list">
                                     {% for file in flashcard.related_file.all %}
                                         <li><a href="{{ file.file.url }}" download>{{ file.title }}</a></li>
                                     {% endfor %}
                                 </ul>
+                            {% endcache %}
                             </div>
                         </div>
                     {% endif %}

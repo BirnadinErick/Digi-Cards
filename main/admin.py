@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
 from django.db import models
 from markdownx.widgets import AdminMarkdownxWidget
 
@@ -15,12 +16,12 @@ class FlashcardAdmin(admin.StackedInline):
     exclude = ['slug', ]
 
 
-class SubUnitAdmin(admin.StackedInline):
+class SubUnitAdmin(admin.TabularInline):
     model = SubUnit
     exclude = ['slug', ]
 
 
-class UnitAdmin(admin.StackedInline):
+class UnitAdmin(admin.TabularInline):
     model = Unit
     exclude = ['slug', ]
 
@@ -73,6 +74,7 @@ class UnitAdmin(admin.ModelAdmin):
 @admin.register(SubUnit)
 class SubUnitAdmin(admin.ModelAdmin):
     inlines = [FlashcardAdmin]
+    extra = 1
     list_display = ("title", "desc", "unit")
     list_filter = ("unit",)
     search_fields = ("title__icontains",)
@@ -105,20 +107,21 @@ class FlashcardModelAdmin(admin.ModelAdmin):
             'fields': ("content_brief", "content_summary", "cheat_sheet",)
         },),
         ("Appendix", {
-            'fields': ("related_file", "prerequisites",)
+            'fields': ("related_file", "prerequisites", "last_updated",)
         },),
     )
     formfield_overrides = {
         models.TextField: {'widget': AdminMarkdownxWidget}
     }
+    readonly_fields = ('last_updated',)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
         form.base_fields["title"].label = "Digi Card Topic:"
         form.base_fields["image"].label = "Digi Card Identifier Image(Required):"
-        form.base_fields["content_brief"].label = "Digi Card Body(Markdown styled):"
-        form.base_fields["content_summary"].label = "Digi Card Summary(Markdown styled):"
-        form.base_fields["cheat_sheet"].label = "Quick cheat sheets for memorization(Markdown styled):"
+        form.base_fields["content_brief"].label = "Digi Card Body:"
+        form.base_fields["content_summary"].label = "Digi Card Summary:"
+        form.base_fields["cheat_sheet"].label = "Cheat Sheets:"
         form.base_fields["prerequisites"].label = "Prerequisites(Relevant subunits):"
         form.base_fields["related_file"].label = "Additional related files(Any type accepted):"
 
@@ -133,8 +136,12 @@ class RelatedFileAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, change=False, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        form.base_fields["title"] = "File Name(with or without extension):"
-        form.base_fields["file"] = "Choose from your system:"
+        form.base_fields["title"] = "File Name:"
+        form.base_fields["file"] = "Choose:"
 
     class Meta:
         model = RelatedFile
+
+
+# Admin customizations
+admin.site.unregister(Group)

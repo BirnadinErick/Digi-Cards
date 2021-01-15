@@ -11,7 +11,7 @@
         }
     }
 
-    ready(function () {
+    ready(function() {
         function handleClick(event) {
             event.preventDefault();
             if (window.location.search.indexOf('&_popup=1') === -1) {
@@ -21,7 +21,7 @@
             }
         }
 
-        document.querySelectorAll('.cancel-link').forEach(function (el) {
+        document.querySelectorAll('.cancel-link').forEach(function(el) {
             el.addEventListener('click', handleClick);
         });
     });

@@ -1,101 +1,37 @@
-<!DOCTYPE html>
+{% extends 'main/base.html' %}
 {% load static %}
-<html lang="en">
+{% load cache %}
 
-<head>
-    <!-- title -->
-    {% if title %}
-        <title>{{ title | upper }}</title>
-    {% else %}
-        <title>Digi Cards</title>
-    {% endif %}
-    <!-- end title -->
+{% block nav_link %}
+    <a href="{% url 'main:unit' flashcards.first.subunit.unit.subject.slug flashcards.first.subunit.unit.slug %}">
+        {{ flashcards.first.subunit.unit.title | upper }}
+    </a>
 
-    <!-- keywords -->
-    <meta charset="utf-8">
-    <meta name="author" content="Birnadin Erick">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1"/>
+{% endblock %}
 
-    <!-- favicon -->
-    <link rel="shortcut icon" href="{% static '/images/favicon.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon-57x57.png' %}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/apple-touch-icon-72x72.png' %}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114.png' %}">
+{% block hero_banner %}
+    {% block hero_image %}
+        {{ flashcards.first.subunit.image.url }}
+    {% endblock %}
 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'main/css/subunit_style.css' %}">
-</head>
+    <h1 style="color: white;">{{ flashcards.first.subunit.title | upper }}</h1>
+    <h3 style="color: white; font-size: 20px;">{{ flashcards.first.subunit.desc | title | truncatewords:5 }}</h3>
 
-<body>
-<header>
-    <nav class="nav">
-        <div class="container">
-            <div class="logo">
-                <a href="https://www.youtube.com/channel/UC5Raeh--AL1ReL6B7YmIEYg" target="_blank">
-                    <img src="{% static 'images/logo-header.png' %}" alt="Crazy Minion" style="height: 50px">
-                </a>
+{% endblock %}
+
+{% block cards_deck %}
+    {% cache 1200 subunit_card_deck flashcards.first.subunit.slug using="frontend" %}
+    {% for flashcard in flashcards %}
+        <a class="card"
+           href="{% url 'main:flashcard' flashcard.subunit.unit.subject.slug flashcard.subunit.unit.slug flashcard.subunit.slug flashcard.slug %}">
+            <div class="card__background" style="background-image: url({{ flashcard.image.url }})"></div>
+            <div class="card__content">
+                <p class="card__category">
+                    {{ flashcard.subunit.unit.subject.title | title }} ➡ {{ flashcard.subunit.unit.title | title }}
+                </p>
+                <h3 class="card__heading">{{ flashcard.title | upper | truncatewords:3 }}</h3>
             </div>
-            <div id="mainListDiv" class="main_list">
-                <ul class="navlinks">
-                    <li>
-                        <a href="{% url 'main:unit' flashcards.first.subunit.unit.subject.slug flashcards.first.subunit.unit.slug %}">
-                            {{ flashcards.first.subunit.unit.title | upper }}
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <span class="navTrigger">
-            <i></i>
-            <i></i>
-            <i></i>
-          </span>
-        </div>
-    </nav>
-</header>
-
-<section class="home" style="background-image: url({{ flashcards.first.subunit.image.url }})">
-    <div id="overlay">
-        <div class="hero-text">
-            <h1 style="color: white;">{{ flashcards.first.subunit.title | upper }}</h1>
-            <h3 style="color: white; font-size: 20px;">{{ flashcards.first.subunit.desc | title | truncatewords:5 }}</h3>
-        </div>
-    </div>
-</section>
-
-<section class="hero-section">
-    <div class="card-grid">
-        {% for flashcard in flashcards %}
-            <a class="card"
-               href="{% url 'main:flashcard' flashcard.subunit.unit.subject.slug flashcard.subunit.unit.slug flashcard.subunit.slug flashcard.slug %}">
-                <div class="card__background" style="background-image: url({{ flashcard.image.url }})"></div>
-                <div class="card__content">
-                    <p class="card__category">
-                        {{ flashcard.subunit.unit.subject.title | title }} ➡ {{ flashcard.subunit.unit.title | title }}
-                    </p>
-                    <h3 class="card__heading">{{ flashcard.title | upper | truncatewords:3 }}</h3>
-                </div>
-            </a>
-        {% endfor %}
-
-    </div>
-</section>
-
-<script src="{% static 'main/js/jquery.min.js' %}"></script>
-<script>
-    $(window).scroll(function () {
-        if ($(document).scrollTop() > 50) {
-            $('.nav').addClass('affix');
-        } else {
-            $('.nav').removeClass('affix');
-        }
-    });
-
-    $('.navTrigger').click(function () {
-        $(this).toggleClass('active');
-        $("#mainListDiv").toggleClass("show_list").fadeIn();
-
-
-    });
-</script>
-</body>
-</html>
+        </a>
+    {% endfor %}
+    {% endcache %}
+{% endblock %}
