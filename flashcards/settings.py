@@ -3,7 +3,6 @@ from datetime import datetime
 from pathlib import Path
 from .credits import (SECRET_KEY, DB_PASSWORD, DB_USER)
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = SECRET_KEY
@@ -30,7 +29,7 @@ INSTALLED_APPS = [
 
 ROOT_URLCONF = 'flashcards.urls'
 MIDDLEWARE = [
-    # 'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -40,7 +39,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware'
 ]
 
@@ -61,18 +60,19 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'flashcards.wsgi.application'
-
-# Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'flashcards_web',
+        'NAME': 'digicardsmaindb',
+        'init_command': "SET sql_mode='STRICT_ALL_TABLES'",
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
     }
 }
+
+# Database
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -96,9 +96,9 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Colombo'
 
-USE_I18N = True
+USE_I18N = False
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 

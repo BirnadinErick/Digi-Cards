@@ -14,7 +14,7 @@ urlpatterns = [
                   path('guardian/doc', include('django.contrib.admindocs.urls')),
                   path('guardian/', admin.site.urls),
                   path('', include('home.urls', namespace='home')),
-                  path('digi-cards/', include('main.urls', namespace='main')),
+                  path('digicards/', include('main.urls', namespace='main')),
                   path('digi-card-markdown/', include('markdownx.urls')),
                   url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
                   url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
@@ -22,7 +22,6 @@ urlpatterns = [
 
 if settings.DEBUG:
     from home.views import view400, view403, view404, view500
-
     urlpatterns += [
         path('500', view500),
         path('404', view404),

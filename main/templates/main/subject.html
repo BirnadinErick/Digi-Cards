@@ -9,29 +9,21 @@
 {% endblock %}
 
 {% block hero_banner %}
-
-    {# hero banner image #}
-    {% block hero_image %}
-        {{ units.first.subject.image.url }}
-    {% endblock %}
-
-    <h1 style="color: white;">{{ units.first.subject.title | upper }}</h1>
-
+    <h1 style="color: white;">{{ obj.title | upper }}</h1>
 {% endblock %}
 
+{% if units %}
 {% block cards_deck %}
-    {% cache 1200 subject_card_deck units.first.subject.slug using="frontend" %}
+    {% cache 1200 subject_card_deck obj.slug using="frontend" %}
     {% for unit in units %}
         <a class="card"
            href="{% url 'main:unit' unit.subject.slug unit.slug  %}">
             <div class="card__background" style="background-image: url({{ unit.image.url }})"></div>
             <div class="card__content">
-                <p class="card__category">
-                    {{ unit.subject.title | title }} ➡ {{ unit.title | title }}
-                </p>
                 <h3 class="card__heading">{{ unit.title | upper | truncatewords:3 }}</h3>
             </div>
         </a>
     {% endfor %}
     {% endcache %}
 {% endblock %}
+{% endif %}

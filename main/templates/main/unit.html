@@ -3,23 +3,17 @@
 {% load cache %}
 
 {% block nav_link %}
-    <a href="{% url 'main:subject' subunits.first.unit.subject.slug %}">
-        {{ subunits.first.unit.subject.title | title | truncatechars:8 }}
+    <a href="{% url 'main:subject' obj.subject.slug %}">
+        {{ obj.subject.title | title }}
     </a>
 {% endblock %}
 
 {% block hero_banner %}
-
-    {# hero banner image #}
-    {% block hero_image %}
-        {{ subunits.first.unit.image.url }}
-    {% endblock %}
-
-    <h1 style="color: white;">{{ subunits.first.unit.title | upper }}</h1>
-    <h3 style="color: white">{{ subunits.first.unit.desc | title }}</h3>
-
+    <h1 style="color: white;">{{ obj.title | upper }}</h1>
+    <h3 style="color: white">{{ obj.desc | title }}</h3>
 {% endblock %}
 
+{% if subunits %}
 {% block cards_deck %}
     {% cache 1200 unit_card_deck subunits.first.unit.slug using="frontend" %}
     {% for subunit in subunits %}
@@ -27,12 +21,10 @@
            href="{% url 'main:subunit' subunit.unit.subject.slug subunit.unit.slug subunit.slug  %}">
             <div class="card__background" style="background-image: url({{ subunit.image.url }})"></div>
             <div class="card__content">
-                <p class="card__category">
-                    {{ subunit.unit.subject.title | title }} ➡ {{ subunit.unit.title | title }}
-                </p>
                 <h3 class="card__heading">{{ subunit.title | upper | truncatewords:2 }}</h3>
             </div>
         </a>
     {% endfor %}
     {% endcache %}
 {% endblock %}
+{% endif %}

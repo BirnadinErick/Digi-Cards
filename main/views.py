@@ -23,8 +23,7 @@ class SubjectView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = self.subject.title
-        context['parent_image_url'] = self.subject.image.url
+        context['obj'] = self.subject
         return context
 
 
@@ -46,11 +45,12 @@ class UnitView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = self.unit.title
+        context['obj'] = self.unit
         return context
 
 
 class SubUnitView(ListView):
+
     """
         :view:'main.SubUnit' View
         Inherits ListView from Django Generic Views
@@ -58,7 +58,6 @@ class SubUnitView(ListView):
         :param subject_slug :type slug
         :param subunit_slug :type slug
     """
-
     template_name = 'main/subunit.html'
     context_object_name = 'flashcards'
 
@@ -70,6 +69,7 @@ class SubUnitView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.subunit.title
+        context['obj'] = self.subunit
         return context
 
 
@@ -97,7 +97,7 @@ class FlashcardView(DetailView):
                 f"https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&order=viewCount&q={card.title}&type=video&videoDimension=2d&videoDuration=medium&videoEmbeddable=true&key={API_KEY}").json()[
                 'items']
         except:
-            return None
+            return ["Error!20030519", "Sorry, Youtube seems to be mad at me!"]
         else:
             return [id['id']['videoId'] for id in items]
 

@@ -3,31 +3,27 @@
 {% load cache %}
 
 {% block nav_link %}
-    <a href="{% url 'main:unit' flashcards.first.subunit.unit.subject.slug flashcards.first.subunit.unit.slug %}">
-        {{ flashcards.first.subunit.unit.title | upper }}
+    <a href="{% url 'main:unit' obj.unit.subject.slug obj.unit.slug %}">
+        {{ flashcards.subunit.unit.title | upper }}
     </a>
 
 {% endblock %}
 
 {% block hero_banner %}
-    {% block hero_image %}
-        {{ flashcards.first.subunit.image.url }}
-    {% endblock %}
-
-    <h1 style="color: white;">{{ flashcards.first.subunit.title | upper }}</h1>
-    <h3 style="color: white; font-size: 20px;">{{ flashcards.first.subunit.desc | title | truncatewords:5 }}</h3>
-
+    <h1 style="color: white;">{{ obj.title | upper }}</h1>
+    <h3 style="color: white; font-size: 20px;">{{ obj.desc | title | truncatewords:5 }}</h3>
 {% endblock %}
 
+{% if flashcards %}
 {% block cards_deck %}
-    {% cache 1200 subunit_card_deck flashcards.first.subunit.slug using="frontend" %}
+    {% cache 1200 subunit_card_deck obj.slug using="frontend" %}
     {% for flashcard in flashcards %}
         <a class="card"
            href="{% url 'main:flashcard' flashcard.subunit.unit.subject.slug flashcard.subunit.unit.slug flashcard.subunit.slug flashcard.slug %}">
             <div class="card__background" style="background-image: url({{ flashcard.image.url }})"></div>
             <div class="card__content">
                 <p class="card__category">
-                    {{ flashcard.subunit.unit.subject.title | title }} ➡ {{ flashcard.subunit.unit.title | title }}
+                    {{ flashcard.last_updated }}
                 </p>
                 <h3 class="card__heading">{{ flashcard.title | upper | truncatewords:3 }}</h3>
             </div>
@@ -35,3 +31,4 @@
     {% endfor %}
     {% endcache %}
 {% endblock %}
+{% endif %}

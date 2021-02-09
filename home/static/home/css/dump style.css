@@ -1,0 +1,293 @@
+/* ===================================
+    Owl carousel
+====================================== */
+
+.owl-carousel {
+    overflow: hidden;
+}
+
+.owl-buttons {
+    position: static;
+}
+
+.owl-prev, .owl-next {
+    color: #111;
+    display: block;
+    font-size: 16px;
+    height: 105px;
+    line-height: 105px;
+    margin-top: -35px;
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 105px;
+    z-index: 6;
+}
+
+.owl-prev {
+    left: -70px;
+}
+
+.owl-next {
+    right: -70px;
+}
+
+.owl-prev:before, .owl-next:before {
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+    content: "";
+    display: block;
+    height: 66%;
+    left: 0;
+    position: absolute;
+    width: 66%;
+}
+
+.owl-next:before {
+    left: auto;
+    right: 0;
+}
+
+.owl-prev .fa, .owl-next .fa {
+    color: #000;
+    font-size: 24px;
+    position: relative;
+    top: -15%;
+}
+
+.owl-prev .fa {
+    right: 4%
+}
+
+.owl-next .fa {
+    left: 4%;
+}
+
+.owl-carousel:hover .owl-prev {
+    left: -35px;
+    opacity: 1;
+}
+
+.owl-carousel:hover .owl-next {
+    opacity: 1;
+    right: -35px;
+}
+
+.owl-pagination {
+    bottom: 30px;
+    display: block;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 5 !important;
+}
+
+.owl-page {
+    display: inline-block;
+    padding: 6px 5px;
+}
+
+.owl-page span {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+    display: block;
+    height: 7px;
+    transition: all 0.27s cubic-bezier(0, 0, 0.58, 1) 0s;
+    width: 7px;
+}
+
+.owl-page:hover span {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 1);
+}
+
+.owl-page.active span {
+    background: none repeat scroll 0 0 transparent;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transform: scale(1.33333);
+}
+
+.owl-bg-img {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.owl-subtitle {
+    font-size: 14px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    font-weight: 400;
+    line-height: 80px;
+    display: block
+}
+
+.owl-title {
+    font-size: 35px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: block;
+    letter-spacing: 7px;
+}
+
+.owl-title-big {
+    background: rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 7px;
+    line-height: 40px;
+    padding: 35px 50px;
+    text-transform: uppercase;
+    width: 60%
+}
+
+.dark-pagination .owl-page span {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 1);
+    box-shadow: none
+}
+
+.dark-pagination .owl-page.active span {
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 1);
+}
+
+.dark-pagination .owl-prev, .owl-next {
+    opacity: 1;
+}
+
+.dark-pagination .owl-next:before {
+    left: auto;
+    right: 0;
+}
+
+.dark-pagination .owl-prev {
+    left: -35px;
+    opacity: 1;
+}
+
+.dark-pagination .owl-next {
+    opacity: 1;
+    right: -35px;
+}
+
+.light-pagination .owl-page.active span {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 1);
+}
+
+/* square pagination */
+.square-pagination .owl-page span {
+    width: 30px;
+    border-radius: inherit;
+    height: 3px;
+    background: rgba(255, 255, 255, .5)
+}
+
+.square-pagination .owl-page.active span {
+    border: none !important;
+    transform: none !important;
+    background: #fff !important
+}
+
+/* hide next-prev arrow */
+.dark-pagination-without-next-prev-arrow .owl-prev, .dark-pagination-without-next-prev-arrow .owl-next {
+    display: none
+}
+
+/* hide dot navigation */
+.owl-no-pagination .owl-pagination {
+    display: none
+}
+
+.owl-no-pagination .owl-prev::before, .owl-no-pagination .owl-next::before {
+    background-color: transparent
+}
+
+.owl-no-pagination .owl-prev .fa, .owl-no-pagination .owl-next .fa {
+    font-size: 30px
+}
+
+/* simple next-prev arrow */
+.owl-prev-next-simple .owl-prev::before, .owl-next::before {
+    box-shadow: none
+}
+
+/* half slider */
+.owl-half-slider .owl-title {
+    width: 50%;
+    line-height: 40px;
+    font-size: 25px;
+}
+
+.owl-half-slider .item {
+    min-height: 750px
+}
+
+.owl-half-slider .container {
+    min-height: 750px
+}
+
+.owl-small-slider .item {
+    min-height: 430px
+}
+
+.owl-small-slider .container {
+    min-height: 400px
+}
+
+/* bottom pagination */
+.bottom-pagination .owl-pagination {
+    position: inherit !important
+}
+
+/* scroll down */
+.scroll-down {
+    bottom: 50px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 9
+}
+
+.scroll-down a i {
+    background: #fff;
+    border-radius: 2px;
+    font-size: 17px;
+    padding: 2px 6px;
+    color: #000;
+}
+
+.scroll-down a i:hover {
+    background: #000;
+    color: #fff
+}
+
+.scroll-to-down {
+    cursor: url("../images/arrow-down.png"), pointer;
+}
+
+.scroll-to-down-white {
+    cursor: url("../images/arrow-down-white.html"), pointer;
+}
+
+.background-slider-text {
+    position: absolute;
+    width: 100%
+}
+
+#owl-demo-background .owl-item {
+    cursor: default !important
+}
+
+/* cursor */
+.cursor-default {
+    cursor: default !important
+}

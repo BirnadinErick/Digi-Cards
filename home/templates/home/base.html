@@ -12,19 +12,54 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1"/>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="{% static '/images/favicon.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon-57x57.png' %}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/apple-touch-icon-72x72.png' %}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114.png' %}">
+    <link rel="shortcut icon" href="{% static 'home/images/favicon.png' %}">
     <!-- bootstrap -->
     <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}"/>
     <!-- style -->
     <link rel="stylesheet" href="{% static 'home/css/style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'home/css/loader.css' %}">
     <!-- responsive css -->
     <link rel="stylesheet" href="{% static 'home/css/responsive.css' %}"/>
+
+    <script type="text/javascript" src="{% static 'home/js/jquery.min.js' %}"></script>
 </head>
 
 <body>
+
+<div id="cupcake" class="box" style="height: 100%; width: 100%; z-index: 1000000">
+    <span class="letter">L</span>
+    <div class="cupcakeCircle box">
+        <div class="cupcakeInner box">
+            <div class="cupcakeCore box">
+            </div>
+        </div>
+    </div>
+    <span class="letter box">A</span>
+    <span class="letter box">D</span>
+    <span class="letter box">I</span>
+    <span class="letter box">N</span>
+    <span class="letter box">G</span>
+</div>
+
+<script>
+    $(window).on("load", function () {
+        $("#cupcake").fadeOut("slow");
+    });
+</script>
+
+{#    <!-- navigation -->#}
+<nav class="navbar no-margin-bottom alt-font without-button transparent-header">
+    <div class="container navigation-menu">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 navbar-header">
+                <a class="navbar-brand inner-link"
+                   href="https://www.youtube.com/channel/UC5Raeh--AL1ReL6B7YmIEYg" target="_blank"><img
+                        src="{% static "home/images/logo-header.png" %}" alt="Crazy Minion"/></a>
+            </div>
+        </div>
+    </div>
+</nav>
+{#    <!-- end navigation -->#}
 
 {% block body %}
     <!-- contents go in here -->
@@ -49,8 +84,9 @@
 <!-- end footer -->
 
 <!-- javascript libraries -->
-<script type="text/javascript" src="{% static 'home/js/jquery.min.js' %}"></script>
+
 <script type="text/javascript" src="{% static 'home/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'home/js/jquery.parallax-1.1.3.js' %}"></script>
 <script type="text/javascript" src="{% static 'home/js/main.js' %}"></script>
 <!-- end javascript libraries -->
 </body>
