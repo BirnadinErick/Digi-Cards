@@ -32,7 +32,7 @@ This repository contains separate brnches to touch up the application.
 That being said, until now (December, 2020) it has following branches:
   * UI/UX Design : This branch contains new frontend work for the application (Done working, v1.0 is out!)
   
-## I hope this will help someone one way or the another. 😉
+## I hope this will help someone one way or the other. 😉
 A 🙋‍♂️ from Jaffna 😘. 
 
 All Rights Reserved. Crazy Minion © 2020.
